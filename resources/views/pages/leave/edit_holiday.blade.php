@@ -12,22 +12,22 @@
                 @method('PUT')
                 <div class="form-group">
                     <label for="h_name">Holiday Name:</label>
-                    <input type="text" class="form-control" name="h_name" id="h_name">
+                    <input type="text" value="{{ $holiday->h_name }}" class="form-control" name="h_name" id="h_name">
                     <span class="text-danger">{{$errors->has('h_name') ? $errors->first('h_name') : ''}}</span>
                 </div>
                 <div class="form-group">
                     <label for="from">From:</label>
-                    <input type="date" name="from" class="form-control" id="from">
+                    <input type="date" name="from" value="{{ $holiday->from }}" class="form-control" id="from">
                     <span class="text-danger">{{$errors->has('from') ? $errors->first('from') : ''}}</span>
                 </div>
                 <div class="form-group">
                     <label for="to">To:</label>
-                    <input type="date" name="to" class="form-control" id="to">
+                    <input type="date" name="to" value="{{ $holiday->to }}" class="form-control" id="to">
                     <span class="text-danger">{{$errors->has('to') ? $errors->first('to') : ''}}</span>
                 </div>
                 <div class="form-group">
                     <label for="no_days">Number Of Days</label>
-                    <input type="number" name="no_days" class="form-control" id="no_days">
+                    <input type="number" value="{{ $holiday->no_days }}"  name="no_days" class="form-control" id="no_days">
                     <span class="text-danger">{{$errors->has('no_days') ? $errors->first('no_days') : ''}}</span>
                 </div>
                 <div class="form-group">
