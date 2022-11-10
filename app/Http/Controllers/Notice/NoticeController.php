@@ -44,16 +44,32 @@ class NoticeController extends Controller
 
     public function edit($id)
     {
-        //
+        $notic = notic::find($id);
+        return view('pages.notice.edit_notice')->with('notics', $notic);
     }
 
     public function update(Request $request, $id)
     {
-        //
+        $request->validate([
+            'notice_type' => 'required',
+            'description' => 'required',
+            'notice_date' => 'required',
+            'notice_by' => 'required',
+        ]);
+
+        $notic = notic::find($id);
+        $input = $request->all();
+        $notic->update($input);
+
+        Session::flash('success', 'Notice Updated');
+        return redirect('notice');
     }
 
     public function destroy($id)
     {
-        //
+        notic::destroy($id);
+
+        Session::flash('success', 'Notice Deleted');
+        return redirect('notice');
     }
 }

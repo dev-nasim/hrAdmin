@@ -5,9 +5,11 @@
     <div class="card shadow mb-4">
         <div class="card-header py-3">
             <a href="{{url('notice/create')}}" type="button" class="btn btn-primary"><i class="fa fa-plus"></i> Add New Notice</a>
-
         </div>
         <div class="card-body">
+            @if(Session::has('success'))
+            <p class="alert alert-info">{{ Session::get('success') }}</p>
+            @endif
             <div class="table-responsive">
                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                     <thead>
@@ -29,8 +31,12 @@
                         <td>{{$notic->notice_date}}</td>
                         <td>{{$notic->notice_by}}</td>
                         <td>
-                            <a href="" class="btn btn-success">View</a>
-                            <a href="" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this item?');">Delete</a>
+                            <a class="btn btn-primary" href="{{ route('notice.edit',$notic->id) }}">Edit</a>
+                            <form action="{{ route('notice.destroy',$notic->id) }}" method="Post">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" onclick="return confirm('Are you sure you want to delete this item?');" class="btn btn-danger">Delete</button>
+                            </form>
                         </td>
                     </tr>
                     @endforeach
