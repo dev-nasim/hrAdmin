@@ -7,8 +7,9 @@
             <a href="{{url('holiday')}}" type="button" class="btn btn-primary"><i class="fa fa-check"></i> Manage Holiday</a>
         </div>
         <div class="card-body">
-            <form action="{{url('holiday')}}" method="post">
+            <form action="{{url('holiday/'.$holiday->id)}}" method="post">
                 {{csrf_field()}}
+                @method('PUT')
                 <div class="form-group">
                     <label for="h_name">Holiday Name:</label>
                     <input type="text" class="form-control" name="h_name" id="h_name">
@@ -30,7 +31,7 @@
                     <span class="text-danger">{{$errors->has('no_days') ? $errors->first('no_days') : ''}}</span>
                 </div>
                 <div class="form-group">
-                    <button class="btn btn-success" type="submit">Submit</button>
+                    <button class="btn btn-success" type="submit">Update</button>
                 </div>
             </form>
         </div>
