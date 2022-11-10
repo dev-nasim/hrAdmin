@@ -11,12 +11,12 @@
                 {{csrf_field()}}
                 <div class="form-group">
                     <label for="possition">Possition Name:</label>
-                    <input type="text" class="form-control" name="possition" id="possition">
+                    <input type="text" value="{{Request::old('possiton')}}" class="form-control" name="possition" id="possition">
                     <span class="text-danger">{{$errors->has('possiton') ? $errors->first('possiton') : ''}}</span>
                 </div>
                 <div class="form-group">
                     <label for="possition_details">Possition Details:</label>
-                    <input type="text" name="possition_details" class="form-control" id="possition_details">
+                    <input type="text" value="{{Request::old('possition_details')}}"  name="possition_details" class="form-control" id="possition_details">
                     <span class="text-danger">{{$errors->has('possition_details') ? $errors->first('possition_details') : ''}}</span>
                 </div>
                 <div class="form-group">
