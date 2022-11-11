@@ -5,7 +5,7 @@
     <div class="card shadow mb-4">
         <div class="card-header py-3">
             <a href="{{url('employee/create')}}" type="button" class="btn btn-primary"><i class="fa fa-plus"></i> Add Employee</a>
-            
+
         </div>
         <div class="card-body">
             <div class="table-responsive">
@@ -31,7 +31,7 @@
                         <td>{{$employee->name}}</td>
                         <td>{{$employee->email}}</td>
                         <td>{{$employee->phone}}</td>
-                        <td>{{$employee->department}}</td>
+                        <td>{{$employee->department ? $employee->department->department_name : 'NA'}}</td>
                         <td>{{$employee->designation}}</td>
                         <td>
                             <form action="{{ route('employee.destroy',$employee->id) }}" method="Post">

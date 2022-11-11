@@ -27,8 +27,8 @@
                 </div>
                 <div class="form-group">
                     <label for="department">Department:</label>
-                    <input type="text" name="department" value="{{$employees->department}}" class="form-control" id="department">
-                    <span class="text-danger">{{$errors->has('department') ? $errors->first('department') : ''}}</span>
+                    <input type="text" name="department_id" value="{{$employees->department->department_name}}" class="form-control" id="department">
+                    <span class="text-danger">{{$errors->has('department_id') ? $errors->first('department_id') : ''}}</span>
                 </div>
                 <div class="form-group">
                     <label for="designation">Designation:</label>

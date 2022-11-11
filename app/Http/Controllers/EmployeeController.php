@@ -9,7 +9,7 @@ use Session;
 
 class EmployeeController extends Controller
 {
-    
+
     public function index()
     {
         $data['employees'] = Employee::paginate(10);
@@ -31,7 +31,7 @@ class EmployeeController extends Controller
             'name' => 'required',
             'email' => 'required|email|unique:employees,email',
             'phone' => 'required|numeric',
-            'department' => 'required',
+            'department_id' => 'required',
             'designation' => 'required',
         ]);
 
@@ -60,7 +60,7 @@ class EmployeeController extends Controller
             'name' => 'required',
             'email' => 'required|email',
             'phone' => 'required|numeric',
-            'department' => 'required',
+            'department_id' => 'required',
             'designation' => 'required',
         ]);
 

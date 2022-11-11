@@ -26,10 +26,10 @@
                 </div>
                 <div class="form-group">
                     <label for="department">Department:</label>
-                    <select class="form-control" name="department">
+                    <select class="form-control" name="department_id">
                         <option value="">Select Department</option>
                         @foreach($departments as $department)
-                            <option value="{{$department->department_name}}">{{$department->department_name}}</option>
+                            <option value="{{$department->id}}">{{$department->department_name}}</option>
                         @endforeach
                     </select>
                     <!-- <input type="text" name="department" value="{{Request::old('department')}}" class="form-control" id="department"> -->
