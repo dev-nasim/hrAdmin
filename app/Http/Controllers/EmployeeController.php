@@ -54,8 +54,10 @@ class EmployeeController extends Controller
 
     public function edit($id)
     {
+        $data['departments'] = Department::get();
+        $data['positions'] = Possition::get();
         $employee = Employee::find($id);
-        return view('pages.employee.edit_emp')->with('employees', $employee);
+        return view('pages.employee.edit_emp',$data)->with('employees', $employee);
     }
 
     public function update(Request $request,Employee $employee)
