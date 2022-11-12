@@ -9,7 +9,7 @@ class Employee extends Model
 {
     use HasFactory;
     protected $fillable=[
-        'name','email','phone','department_id','designation'
+        'name','email','phone','department_id', 'possition_id', 'designation'
     ];
 
 
@@ -18,5 +18,11 @@ class Employee extends Model
     {
         // class, foregin key, local key
         return $this->belongsTo(Department::class, 'department_id', 'id');
+    }
+
+
+    public function position()
+    {
+        return $this->belongsTo(Possition::class, 'possition_id', 'id');
     }
 }

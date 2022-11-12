@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Employee;
 use App\Models\Department;
+use App\Models\Possition;
+
 use Session;
 
 class EmployeeController extends Controller
@@ -20,6 +22,7 @@ class EmployeeController extends Controller
     public function create()
     {
         $data['departments'] = Department::get();
+        $data['positions'] = Possition::get();
         return view('pages.employee.add_employee',$data);
     }
 
@@ -32,6 +35,7 @@ class EmployeeController extends Controller
             'email' => 'required|email|unique:employees,email',
             'phone' => 'required|numeric',
             'department_id' => 'required',
+            'possition_id' => 'required',
             'designation' => 'required',
         ]);
 
@@ -61,6 +65,7 @@ class EmployeeController extends Controller
             'email' => 'required|email',
             'phone' => 'required|numeric',
             'department_id' => 'required',
+            'possition_id' => 'required',
             'designation' => 'required',
         ]);
 
