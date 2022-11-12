@@ -9,7 +9,7 @@ class Employee extends Model
 {
     use HasFactory;
     protected $fillable=[
-        'name','email','phone','department_id', 'possition_id', 'designation'
+        'name','email','phone','department_id', 'possition_id', 'award_id', 'designation'
     ];
 
 
@@ -24,5 +24,10 @@ class Employee extends Model
     public function position()
     {
         return $this->belongsTo(Possition::class, 'possition_id', 'id');
+    }
+
+    public function award()
+    {
+        return $this->belongsTo(Award::class, 'award_id', 'id');
     }
 }
