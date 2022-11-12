@@ -5,7 +5,7 @@
     <div class="card shadow mb-4">
         <div class="card-header py-3">
             <a href="{{url('award/create')}}" type="button" class="btn btn-primary"><i class="fa fa-plus"></i> Add New Gift</a>
-            
+
         </div>
         <div class="card-body">
             <div class="table-responsive">

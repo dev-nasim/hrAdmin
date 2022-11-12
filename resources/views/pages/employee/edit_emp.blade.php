@@ -25,6 +25,7 @@
                     <input type="text" name="phone" value="{{$employees->phone}}" class="form-control" id="phone">
                     <span class="text-danger">{{$errors->has('phone') ? $errors->first('phone') : ''}}</span>
                 </div>
+
                 <div class="form-group">
                     <label for="department">Department:</label>
                     <select class="form-control" name="department_id">
@@ -36,6 +37,7 @@
                 <!-- <input type="text" name="department" value="{{Request::old('department_id')}}" class="form-control" id="department"> -->
                     <span class="text-danger">{{$errors->has('department_id') ? $errors->first('department_id') : ''}}</span>
                 </div>
+
                 <div class="form-group">
                     <label for="department">Possition:</label>
                     <select class="form-control" name="possition_id">
@@ -46,17 +48,6 @@
                     </select>
                 <!-- <input type="text" name="department" value="{{Request::old('possition_id')}}" class="form-control" id="department"> -->
                     <span class="text-danger">{{$errors->has('possition_id') ? $errors->first('possition_id') : ''}}</span>
-                </div>
-
-                <div class="form-group">
-                    <label for="award">award:</label>
-                    <select class="form-control" name="award_id">
-                        <option value="">Select award</option>
-                        @foreach($awards as $award)
-                            <option value="{{$award->id}}">{{$award->awd_name}}</option>
-                        @endforeach
-                    </select>
-                    <span class="text-danger">{{$errors->has('award_id') ? $errors->first('award_id') : ''}}</span>
                 </div>
 
                 <div class="form-group">

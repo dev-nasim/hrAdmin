@@ -23,12 +23,10 @@
                     <label for="emp_name">Employee Name:</label>
                     <select class="form-control" name="emp_name">
                         <option value="">Select Employee</option>
-
                         @foreach($employees as $employees)
                             <option name="emp_name" value="{{$employees->name}}">{{$employees->name}}</option>
                         @endforeach
                     </select>
-{{--                    <input type="text" name="emp_name" class="form-control" id="emp_name">--}}
                     <span class="text-danger">{{$errors->has('emp_name') ? $errors->first('emp_name') : ''}}</span>
                 </div>
                 <div class="form-group">

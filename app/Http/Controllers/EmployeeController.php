@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Award;
 use Illuminate\Http\Request;
 use App\Models\Employee;
 use App\Models\Department;
@@ -23,7 +22,6 @@ class EmployeeController extends Controller
     {
         $data['departments'] = Department::get();
         $data['positions'] = Possition::get();
-        $data['awards'] = Award::get();
         return view('pages.employee.add_employee',$data);
     }
 
@@ -37,7 +35,6 @@ class EmployeeController extends Controller
             'phone' => 'required|numeric',
             'department_id' => 'required',
             'possition_id' => 'required',
-            'award_id' => 'required',
             'designation' => 'required',
         ]);
 
@@ -58,7 +55,6 @@ class EmployeeController extends Controller
     {
         $data['departments'] = Department::get();
         $data['positions'] = Possition::get();
-        $data['awards'] = Award::get();
         $employee = Employee::find($id);
         return view('pages.employee.edit_emp',$data)->with('employees', $employee);
     }
@@ -71,7 +67,6 @@ class EmployeeController extends Controller
             'phone' => 'required|numeric',
             'department_id' => 'required',
             'possition_id' => 'required',
-            'award_id' => 'required',
             'designation' => 'required',
         ]);
 

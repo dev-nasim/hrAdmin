@@ -18,7 +18,6 @@
                         <th>ID</th>
                         <th>Name</th>
                         <th>Position Name</th>
-                        <th>Award Name</th>
                         <th>Email</th>
                         <th>Phone</th>
                         <th>Department</th>
@@ -32,7 +31,6 @@
                         <td>{{$employee->id}}</td>
                         <td>{{$employee->name}}</td>
                         <td>{{$employee->position ? $employee->position->possition: ''}}</td>
-                        <td>{{$employee->award ? $employee->award->awd_name: ''}}</td>
                         <td>{{$employee->email}}</td>
                         <td>{{$employee->phone}}</td>
                         <td>{{$employee->department ? $employee->department->department_name : 'NA'}}</td>
