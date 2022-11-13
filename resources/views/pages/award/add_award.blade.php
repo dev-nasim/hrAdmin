@@ -20,14 +20,14 @@
                     <span class="text-danger">{{$errors->has('awd_des') ? $errors->first('awd_des') : ''}}</span>
                 </div>
                 <div class="form-group">
-                    <label for="emp_name">Employee Name:</label>
-                    <select class="form-control" name="emp_name">
+                    <label for="emp_name">Employee:</label>
+                    <select class="form-control" name="employee_id">
                         <option value="">Select Employee</option>
-                        @foreach($employees as $employees)
-                            <option name="emp_name" value="{{$employees->name}}">{{$employees->name}}</option>
+                        @foreach($employees as $employee)
+                            <option value="{{$employee->id}}">{{$employee->name}}</option>
                         @endforeach
                     </select>
-                    <span class="text-danger">{{$errors->has('emp_name') ? $errors->first('emp_name') : ''}}</span>
+                    <span class="text-danger">{{$errors->has('employee_id') ? $errors->first('employee_id') : ''}}</span>
                 </div>
                 <div class="form-group">
                     <label for="awd_item">Gift Item:</label>
