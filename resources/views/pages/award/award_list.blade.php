@@ -5,7 +5,7 @@
     <div class="card shadow mb-4">
         <div class="card-header py-3">
             <a href="{{url('award/create')}}" type="button" class="btn btn-primary"><i class="fa fa-plus"></i> Add New Gift</a>
-            
+
         </div>
         <div class="card-body">
             <div class="table-responsive">
@@ -16,9 +16,9 @@
                     <thead>
                     <tr>
                         <th>Sl No.</th>
-                        <th>Employee Name</th>
                         <th>Award Name</th>
                         <th>Award Description</th>
+                        <th>Employee</th>
                         <th>Gift Item</th>
                         <th>Date</th>
                         <th>Gift by</th>
@@ -29,9 +29,9 @@
                     @foreach($awards as $award)
                     <tr>
                         <td>{{$award->id}}</td>
-                        <td><strong style="color: #000000">{{$award->emp_name}}</strong></td>
                         <td>{{$award->awd_name}}</td>
                         <td>{{$award->awd_des}}</td>
+                        <td>{{$award->employee ? $award->employee->name :  'NA'}}</td>
                         <td>{{$award->awd_item}}</td>
                         <td>{{$award->awd_date}}</td>
                         <td>{{$award->awd_by}}</td>

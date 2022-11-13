@@ -6,8 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Employee;
 use App\Models\Department;
 use App\Models\Possition;
-
-use Session;
+use Illuminate\Support\Facades\Session;
 
 class EmployeeController extends Controller
 {
