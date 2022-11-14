@@ -20,8 +20,28 @@
                         <input type="text" name="lv_type" class="form-control" id="lv_type">
                     </div>
                     <div class="form-group col-md-6">
+                        <label for="ap_start">Application Start Date:</label>
+                        <input type="date" name="ap_start" class="form-control" id="ap_start">
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="ap_end">Application End Date:</label>
+                        <input type="date" name="ap_end" class="form-control" id="ap_end">
+                    </div>
+                    <div class="form-group col-md-6">
                         <label for="app_day">Apply Day:</label>
                         <input type="text" name="app_day" class="form-control" id="app_day">
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="ap_hard_copy">Application Hard Copy:</label>
+                        <input type="file" name="ap_hard_copy" class="form-control" id="ap_hard_copy">
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="approve_start">Approve Start Date:</label>
+                        <input type="text" name="approve_start" class="form-control" id="approve_start">
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="approve_end">Approve End Date:</label>
+                        <input type="text" name="approve_end" class="form-control" id="approve_end">
                     </div>
                     <div class="form-group col-md-6">
                         <label for="approve_day">Approve Day:</label>

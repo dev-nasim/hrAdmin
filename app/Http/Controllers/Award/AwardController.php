@@ -6,11 +6,11 @@ use App\Http\Controllers\Controller;
 use App\Models\Award;
 use App\Models\Employee;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Session;
+use Session;
 
 class AwardController extends Controller
 {
-
+    
     public function index()
     {
         $data['awards'] = Award::paginate(10);
@@ -28,7 +28,7 @@ class AwardController extends Controller
         $this->validate($request,[
             'awd_name' => 'required',
             'awd_des' => 'required',
-            'employee_id' => 'required',
+            'emp_name' => 'required',
             'awd_item' => 'required',
             'awd_date' => 'required',
             'awd_by' => 'required',
@@ -57,17 +57,13 @@ class AwardController extends Controller
         $this->validate($request,[
             'awd_name' => 'required',
             'awd_des' => 'required',
-            'employee_id' => 'required',
+            'emp_name' => 'required',
             'awd_item' => 'required',
             'awd_date' => 'required',
             'awd_by' => 'required',
         ]);
-
         $award->update($request->all());
         return redirect()->route('award.index')->with('success', 'Award Updated successfully');
-
-        Session::flash('success', 'Award updated');
-        return redirect('award');
     }
 
     public function destroy(Award $award)
