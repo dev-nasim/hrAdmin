@@ -8,4 +8,5 @@ use Illuminate\Database\Eloquent\Model;
 class WeeklyHoliday extends Model
 {
     use HasFactory;
+    protected $fillable=['weekly_holiday'];
 }

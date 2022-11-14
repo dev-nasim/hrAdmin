@@ -66,7 +66,7 @@ class EmployeeController extends Controller
             'email' => 'required|email',
             'phone' => 'required|numeric',
             'department_id' => 'required',
-            'possition_id' => 'required',
+//            'possition' => 'required',
             'designation' => 'required',
         ]);
 

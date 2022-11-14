@@ -3,14 +3,17 @@
 namespace App\Http\Controllers\Holiday;
 
 use App\Http\Controllers\Controller;
+use App\Models\WeeklyHoliday;
 use Illuminate\Http\Request;
+use Session;
 
 class WeeklyHolidayController extends Controller
 {
     
     public function index()
     {
-        return view('pages.leave.weekly_holiday');
+        $data['weeklyholidys'] = WeeklyHoliday::get();
+        return view('pages.leave.weekly_holiday',$data);
     }
 
     public function create()
@@ -20,7 +23,15 @@ class WeeklyHolidayController extends Controller
 
     public function store(Request $request)
     {
-        //
+//        $this->validate($request,[
+//            'weekly_holiday' => 'required',
+//        ]);
+//
+//        $model = new WeeklyHoliday();
+//        $model->fill($request->all())->save();
+//
+//        Session::flash('success', 'weekly holiday Inserted');
+//        return redirect('weekly_holiday');
     }
 
     public function show($id)
@@ -30,12 +41,16 @@ class WeeklyHolidayController extends Controller
 
     public function edit($id)
     {
-        //
+        $data = WeeklyHoliday::find($id);
+        return view('pages.leave.edit_wh')->with('weeklyholidys', $data);
     }
 
-    public function update(Request $request, $id)
+    public function update(Request $request,WeeklyHoliday $weekly_holiday)
     {
-        //
+        $weekly_holiday->update($request->all());
+
+        return redirect()->route('weekly_holiday.index')->with('success', 'Employee Updated successfully');
+
     }
 
     public function destroy($id)

@@ -15,6 +15,7 @@ return new class extends Migration
     {
         Schema::create('weekly_holidays', function (Blueprint $table) {
             $table->id();
+            $table->string('weekly_holiday');
             $table->timestamps();
         });
     }
