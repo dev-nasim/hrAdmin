@@ -24,7 +24,7 @@
                             <td>{{$weeklyholidy->id}}</td>
                             <td>{{$weeklyholidy->weekly_holiday}}</td>
                             <td>
-                                <a href="{{ route('weekly_holiday.edit',$weeklyholidy->id) }}" class="btn btn-success">Edit</a>
+                                <a href="{{ route('weekly_holiday.edit',$weeklyholidy->id) }}" class="btn btn-success"><i class="fa fa-pen"></i></a>
                             </td>
                         </tr>
                     @endforeach()

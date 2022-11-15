@@ -13,7 +13,10 @@ class EmployeeController extends Controller
 
     public function index()
     {
-        $data['employees'] = Employee::paginate(10);
+//        $data['employees'] = Employee::with('department')->paginate(10);
+        $data['employees'] = Employee::with('position')
+            ->join('departments', 'employees.department_id', 'departments.id')->paginate(10);
+//        dd($data['employees']);
         return view('pages.employee.emp_list',$data);
 
     }

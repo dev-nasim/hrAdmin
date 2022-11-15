@@ -28,10 +28,10 @@
                         <td>{{$possition->possition_details}}</td>
                         <td>
                             <form action="{{ route('possition.destroy',$possition->id) }}" method="Post">
-                                <a class="btn btn-primary" href="{{ route('possition.edit',$possition->id) }}">Edit</a>
+                                <a class="btn btn-primary" href="{{ route('possition.edit',$possition->id) }}"><i class="fa fa-pen"></i></a>
                                 @csrf
                                 @method('DELETE')
-                                <button type="submit" onclick="return confirm('Are you sure you want to delete this item?');" class="btn btn-danger">Delete</button>
+                                <button type="submit" onclick="return confirm('Are you sure you want to delete this item?');" class="btn btn-danger"><i class="fa fa-trash"></i></button>
                             </form>
                         </td>
                     </tr>

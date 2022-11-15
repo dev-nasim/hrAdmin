@@ -37,10 +37,10 @@
                         <td>{{$award->awd_by}}</td>
                         <td>
                             <form action="{{ route('award.destroy',$award->id) }}" method="Post">
-                                <a href="{{ route('award.edit',$award->id) }}" class="btn btn-success">Edit</a>
+                                <a href="{{ route('award.edit',$award->id) }}" class="btn btn-success"><i class="fa fa-pen"></i></a>
                                 @csrf
                                 @method('DELETE')
-                                <button type="submit" onclick="return confirm('Are you sure you want to delete this item?');" class="btn btn-danger">Delete</button>
+                                <button type="submit" onclick="return confirm('Are you sure you want to delete this item?');" class="btn btn-danger"><i class="fa fa-trash"></i></button>
                             </form>
                         </td>
                     </tr>

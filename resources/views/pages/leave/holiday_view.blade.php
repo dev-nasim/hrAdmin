@@ -32,7 +32,7 @@
                         <td>{{ $holiday->no_days }}</td>
                         <td>
                             <form action="{{ route('holiday.destroy',$holiday->id) }}" method="Post">
-                                <a class="btn btn-primary" href="{{ route('holiday.edit',$holiday->id) }}">Edit</a>
+                                <a class="btn btn-primary" href="{{ route('holiday.edit',$holiday->id) }}"><i class="fa fa-pen"></i></a>
                                 @csrf
                                 @method('DELETE')
                                 <button type="submit" class="btn btn-danger">Delete</button>
