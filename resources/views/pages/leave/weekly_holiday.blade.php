@@ -19,12 +19,12 @@
                     </tr>
                     </thead>
                     <tbody>
-                    @foreach($weeklyholidys as $weeklyholidy)
+                    @foreach($weeklyholidays as $weeklyholiday)
                         <tr>
-                            <td>{{$weeklyholidy->id}}</td>
-                            <td>{{$weeklyholidy->weekly_holiday}}</td>
+                            <td>{{$weeklyholiday->id}}</td>
+                            <td>{{$weeklyholiday->weekly_holiday}}</td>
                             <td>
-                                <a href="{{ route('weekly_holiday.edit',$weeklyholidy->id) }}" class="btn btn-success"><i class="fa fa-pen"></i></a>
+                                <a href="{{ route('weekly_holiday.edit',$weeklyholiday->id) }}" class="btn btn-success"><i class="fa fa-pen"></i></a>
                             </td>
                         </tr>
                     @endforeach()
