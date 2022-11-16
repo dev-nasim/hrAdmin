@@ -13,7 +13,7 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('weeklyholidays', function (Blueprint $table) {
+        Schema::create('weekly_holidays', function (Blueprint $table) {
             $table->id();
             $table->string('weekly_holiday');
 
@@ -28,6 +28,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('weeklyholidays');
+        Schema::dropIfExists('weekly_holidays');
     }
 };

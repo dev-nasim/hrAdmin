@@ -14,17 +14,17 @@
                     <thead>
                     <tr>
                         <th>SL</th>
-                        <th>Weekly Leave Day</th>
+                        <th>Weekly HOLIDAY </th>
                         <th>Edit</th>
                     </tr>
                     </thead>
                     <tbody>
-                    @foreach($weeklyholidays as $weeklyholiday)
+                    @foreach($weeklyholidys as $weeklyholidy)
                         <tr>
-                            <td>{{$weeklyholiday->id}}</td>
-                            <td>{{$weeklyholiday->weekly_holiday}}</td>
+                            <td>{{$weeklyholidy->id}}</td>
+                            <td>{{$weeklyholidy->weekly_holiday}}</td>
                             <td>
-                                <a href="{{ route('weekly_holiday.edit',$weeklyholiday->id) }}" class="btn btn-success"><i class="fa fa-pen"></i></a>
+                                <a href="{{ route('weekly_holiday.edit',$weeklyholidy->id) }}" class="btn btn-success"><i class="fa fa-pen"></i></a>
                             </td>
                         </tr>
                     @endforeach()

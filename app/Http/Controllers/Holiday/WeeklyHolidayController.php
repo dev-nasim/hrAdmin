@@ -12,7 +12,7 @@ class WeeklyHolidayController extends Controller
 
     public function index()
     {
-        $data['weeklyholidays'] = WeeklyHoliday::get();
+        $data['weeklyholidys'] = WeeklyHoliday::get();
         return view('pages.leave.weekly_holiday',$data);
     }
 
@@ -42,7 +42,7 @@ class WeeklyHolidayController extends Controller
     public function edit($id)
     {
         $data = WeeklyHoliday::find($id);
-        return view('pages.leave.edit_wh')->with('weeklyholidays', $data);
+        return view('pages.leave.edit_wh')->with('weekly_holidays', $data);
     }
 
     public function update(Request $request,WeeklyHoliday $weekly_holiday)
