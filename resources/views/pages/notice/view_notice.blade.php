@@ -31,8 +31,9 @@
                         <td>{{$notic->notice_date}}</td>
                         <td>{{$notic->notice_by}}</td>
                         <td>
-                            <a class="btn btn-primary" href="{{ route('notice.edit',$notic->id) }}"><i class="fa fa-pen"></i></a>
+
                             <form action="{{ route('notice.destroy',$notic->id) }}" method="Post">
+                                <a class="btn btn-primary" href="{{ route('notice.edit',$notic->id) }}"><i class="fa fa-pen"></i></a>
                                 @csrf
                                 @method('DELETE')
                                 <button type="submit" onclick="return confirm('Are you sure you want to delete this item?');" class="btn btn-danger"><i class="fa fa-trash"></i></button>
