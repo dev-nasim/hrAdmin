@@ -12,7 +12,7 @@
                 @method('PUT')
                 <div class="form-group">
                     <label for="weekly_holiday">Add:</label>
-                    <input type="text" value="{{$weeklyholidys->weekly_holiday}}" class="form-control" name="weekly_holiday" id="weekly_holiday">
+                    <input type="date" value="{{$weeklyholidys->weekly_holiday}}" class="form-control" name="weekly_holiday" id="weekly_holiday">
                     <span class="text-danger">{{$errors->has('weekly_holiday') ? $errors->first('weekly_holiday') : ''}}</span>
                 </div>
                 <div class="form-group">

@@ -24,12 +24,8 @@
                         <input type="text" name="app_day" class="form-control" id="app_day">
                     </div>
                     <div class="form-group col-md-6">
-                        <label for="approve_day">Approve Day:</label>
-                        <input type="text" name="approve_day" class="form-control" id="approve_day">
-                    </div>
-                    <div class="form-group col-md-6">
-                        <label for="approve_by">Approve By:</label>
-                        <input type="text" name="approve_by" class="form-control" id="approve_by">
+                        <label for="app_day">Appove Day:</label>
+                        <input type="text" name="app_day" class="form-control" id="app_day">
                     </div>
                     <div class="form-group col-md-6">
                         <label for="reason">Reason:</label>
