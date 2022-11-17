@@ -14,7 +14,7 @@
                     <thead>
                     <tr>
                         <th>SL</th>
-                        <th>Weekly Leave Day</th>
+                        <th>Weekly HOLIDAY </th>
                         <th>Edit</th>
                     </tr>
                     </thead>

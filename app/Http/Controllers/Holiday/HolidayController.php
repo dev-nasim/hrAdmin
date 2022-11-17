@@ -47,7 +47,7 @@ class HolidayController extends Controller
 
     public function edit(Holiday $holiday)
     {
-        return view('pages.Leave.edit_holiday',compact('holiday'));
+        return view('pages.leave.edit_holiday',compact('holiday'));
     }
 
     public function update(Request $request, Holiday $holiday)

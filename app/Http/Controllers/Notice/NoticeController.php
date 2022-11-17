@@ -37,7 +37,7 @@ class NoticeController extends Controller
         return redirect('notice');
     }
 
-    public function show($id)
+    public function show(notic $notics)
     {
         //
     }

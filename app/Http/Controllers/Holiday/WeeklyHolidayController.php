@@ -9,7 +9,7 @@ use Session;
 
 class WeeklyHolidayController extends Controller
 {
-    
+
     public function index()
     {
         $data['weeklyholidys'] = WeeklyHoliday::get();
@@ -42,14 +42,14 @@ class WeeklyHolidayController extends Controller
     public function edit($id)
     {
         $data = WeeklyHoliday::find($id);
-        return view('pages.leave.edit_wh')->with('weeklyholidys', $data);
+        return view('pages.leave.edit_wh')->with('weekly_holidays', $data);
     }
 
     public function update(Request $request,WeeklyHoliday $weekly_holiday)
     {
         $weekly_holiday->update($request->all());
 
-        return redirect()->route('weekly_holiday.index')->with('success', 'Employee Updated successfully');
+        return redirect()->route('weekly_holiday.index')->with('success', 'weekly holiday Updated successfully');
 
     }
 
