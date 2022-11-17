@@ -7,6 +7,7 @@ use App\Models\Employee;
 use App\Models\Department;
 use App\Models\Possition;
 use Illuminate\Support\Facades\Session;
+use App\Http\Requests\EmployeeRequest;
 
 class EmployeeController extends Controller
 {
@@ -14,8 +15,7 @@ class EmployeeController extends Controller
     public function index()
     {
 //        $data['employees'] = Employee::with('department')->paginate(10);
-        $data['employees'] = Employee::with('position')
-            ->join('departments', 'employees.department_id', 'departments.id')->paginate(10);
+        $data['employees'] = Employee::with(['position','department'])->paginate(10);
 //        dd($data['employees']);
         return view('pages.employee.emp_list',$data);
 
@@ -29,17 +29,9 @@ class EmployeeController extends Controller
     }
 
 
-    public function store(Request $request)
+    public function store(EmployeeRequest $request)
     {
 
-        $this->validate($request,[
-            'name' => 'required',
-            'email' => 'required|email|unique:employees,email',
-            'phone' => 'required|numeric',
-            'department_id' => 'required',
-            'possition_id' => 'required',
-            'designation' => 'required',
-        ]);
 
 
         $model = new Employee();
