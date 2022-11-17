@@ -33,7 +33,7 @@
                         <td>{{$employee->position ? $employee->position->possition: ''}}</td>
                         <td>{{$employee->email}}</td>
                         <td>{{$employee->phone}}</td>
-                        <td>{{$employee->department ? $employee->department_name : 'NA'}}</td>
+                        <td>{{$employee->department ? $employee->department->department_name: 'NA'}}</td>
                         <td>{{$employee->designation}}</td>
                         <td>
                             <form action="{{ route('employee.destroy',$employee->id) }}" method="Post">
