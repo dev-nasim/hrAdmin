@@ -31,10 +31,9 @@
                     <select class="form-control" name="department_id">
                         <option value="">Select Department</option>
                         @foreach($departments as $department)
-                            <option value="{{$department->id}}">{{$department->department_name}}</option>
+                        <option value="{{$department->id}}" {{$department->id == $employees->department_id ? 'selected':''}} >{{$department->department_name}}</option>
                         @endforeach
                     </select>
-                <!-- <input type="text" name="department" value="{{Request::old('department_id')}}" class="form-control" id="department"> -->
                     <span class="text-danger">{{$errors->has('department_id') ? $errors->first('department_id') : ''}}</span>
                 </div>
 
@@ -43,10 +42,9 @@
                     <select class="form-control" name="possition_id">
                         <option value="">Select Possition</option>
                         @foreach($positions as $possition)
-                            <option value="{{$possition->id}}">{{$possition->possition}}</option>
+                        <option value="{{$possition->id}}" {{$possition->id == $employees->possition_id ? 'selected':''}}>{{$possition->possition}}</option>
                         @endforeach
                     </select>
-                <!-- <input type="text" name="department" value="{{Request::old('possition_id')}}" class="form-control" id="department"> -->
                     <span class="text-danger">{{$errors->has('possition_id') ? $errors->first('possition_id') : ''}}</span>
                 </div>
 

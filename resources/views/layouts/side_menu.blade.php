@@ -35,6 +35,21 @@
             </div>
         </div>
     </li>
+
+    <li class="nav-item">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#role"
+           aria-expanded="true" aria-controls="role">
+            <i class="fa fa-user"></i>
+            <span>Role</span>
+        </a>
+        <div id="role" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+            <div class="bg-white py-2 collapse-inner rounded">
+                <a class="collapse-item" href="{{url('role')}}">List</a>
+                <a class="collapse-item" href="{{url('role/create')}}">Add</a>
+            </div>
+        </div>
+    </li>
+
     <!-- Nav Item - Employee Collapse Menu -->
     <li class="nav-item">
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#employee"

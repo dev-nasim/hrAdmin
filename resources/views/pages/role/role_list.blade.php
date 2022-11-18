@@ -15,17 +15,14 @@
                     <thead>
                     <tr>
                         <th>SL No.</th>
-                        <th>Name</th>
-                        <th>Email</th>
                         <th>Role</th>
                     </tr>
                     </thead>
                     <tbody>
-                    @foreach($users as $user)
+                    @foreach($roles as $role)
                         <tr>
-                            <td>{{$user->id}}</td>
-                            <td>{{$user->name}}</td>
-                            <td>{{$user->email}}</td>
+                            <td>{{$role->id}}</td>
+                            <td>{{$role->role}}</td>
                             <td>
 
                             </td>

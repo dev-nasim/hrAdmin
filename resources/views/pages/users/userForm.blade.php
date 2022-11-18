@@ -10,24 +10,19 @@
             <form action="{{url('users')}}" method="post">
                 {{csrf_field()}}
                 <div class="form-group">
-                    <label for="usr">Name:</label>
-                    <input type="text" class="form-control" name="name" id="usr">
+                    <label for="name">Name:</label>
+                    <input type="text" class="form-control" name="name" id="user">
+                    <span class="text-danger">{{$errors->has('name') ? $errors->first('name') : ''}}</span>
                 </div>
                 <div class="form-group">
-                    <label for="possition">Possition:</label>
-                    <input type="text" name="possition" class="form-control" id="possition">
+                    <label for="email">Email:</label>
+                    <input type="email" name="email" class="form-control" id="email">
+                    <span class="text-danger">{{$errors->has('email') ? $errors->first('email') : ''}}</span>
                 </div>
                 <div class="form-group">
-                    <label for="office">Office:</label>
-                    <input type="text" name="office" class="form-control" id="office">
-                </div>
-                <div class="form-group">
-                    <label for="age">Age:</label>
-                    <input type="text" name="age" class="form-control" id="age">
-                </div>
-                <div class="form-group">
-                    <label for="start-date">Start Date:</label>
-                    <input type="date" name="start-date" class="form-control" id="start-date">
+                    <label for="password">Password:</label>
+                    <input type="password" name="password" class="form-control" id="password">
+                    <span class="text-danger">{{$errors->has('password') ? $errors->first('password') : ''}}</span>
                 </div>
                 <div class="form-group">
                     <button class="btn btn-success" type="submit">Submit</button>
