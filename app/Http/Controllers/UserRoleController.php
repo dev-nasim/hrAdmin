@@ -46,16 +46,30 @@ class UserRoleController extends Controller
 
     public function edit($id)
     {
-        //
+        $data['users'] = User::get();
+        $data['roles'] = Role::get();
+        $user_role = UserRole::find($id);
+        return view('pages.userRole.edit_user',$data)->with('user_roles', $user_role);
     }
 
-    public function update(Request $request, $id)
+    public function update(Request $request,UserRole $user_role)
     {
-        //
+        $request->validate([
+            'user_id' => 'required',
+            'role_id' => 'required',
+        ]);
+
+        $user_role->update($request->all());
+
+        return redirect()->route('user_role.index')->with('success', 'user Updated successfully');
     }
 
     public function destroy($id)
     {
-        //
+        UserRole::destroy($id);
+        // $user_role->delete();
+
+        Session::flash('success', 'user Deleted');
+        return redirect('user_role');
     }
 }

@@ -7,14 +7,15 @@
             <a href="{{url('user_role')}}" type="button" class="btn btn-primary"><i class="fa fa-check"></i> Manage Role</a>
         </div>
         <div class="card-body">
-            <form action="{{url('user_role')}}" method="post">
+            <form action="{{url('user_role/' .$user_roles->id)}}" method="post">
                 {{csrf_field()}}
+                @method('PUT')
                 <div class="form-group">
                     <label for="user_id">Users:</label>
                     <select class="form-control" name="user_id">
                         <option value="">Select Users</option>
-                        @foreach($users as $user)
-                            <option value="{{$user->id}}">{{$user->name}}</option>
+                        @foreach($users  as $user)
+                        <option value="{{$user->id}}" {{$user->id == $user_roles->user_id ? 'selected':''}} >{{$user->name}}</option>
                         @endforeach
                     </select>
                     <span class="text-danger">{{$errors->has('user_id') ? $errors->first('user_id') : ''}}</span>
@@ -24,7 +25,7 @@
                     <select class="form-control" name="role_id">
                         <option value="">Select Role:</option>
                         @foreach($roles as $role)
-                            <option value="{{$role->id}}">{{$role->role}}</option>
+                        <option value="{{$role->id}}" {{$role->id == $user_roles->role_id ? 'selected':''}} >{{$role->role}}</option>
                         @endforeach
                     </select>
                     <span class="text-danger">{{$errors->has('role_id') ? $errors->first('role_id') : ''}}</span>

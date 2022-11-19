@@ -27,8 +27,8 @@
                             <td>{{$user_role->user ? $user_role->user->name: ''}}</td>
                             <td>{{$user_role->user ? $user_role->role->role: ''}}</td>
                             <td>
-                                <form action="#" method="Post">
-                                    <a class="btn btn-primary" href="#"><i class="fa fa-pen"></i></a>
+                                <form action="{{ route('user_role.destroy',$user_role->id) }}" method="POST">
+                                    <a class="btn btn-primary" href="{{ route('user_role.edit',$user_role->id) }}"><i class="fa fa-pen"></i></a>
                                     @csrf
                                     @method('DELETE')
                                     <button type="submit" onclick="return confirm('Are you sure you want to delete this item?');" class="btn btn-danger"><i class="fa fa-trash"></i></button>
