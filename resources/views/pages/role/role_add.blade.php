@@ -1,10 +1,10 @@
 @extends('layouts.master')
 
 @section('content')
-    <h1 class="h3 mb-2 text-gray-800">User Add</h1>
+    <h1 class="h3 mb-2 text-gray-800">Role Add</h1>
     <div class="card shadow mb-4">
         <div class="card-header py-3">
-            <h6 class="m-0 font-weight-bold text-primary">DataTables Example</h6>
+            <a href="{{url('role')}}" type="button" class="btn btn-primary"><i class="fa fa-check"></i> Manage Role</a>
         </div>
         <div class="card-body">
             <form action="{{url('role')}}" method="post">

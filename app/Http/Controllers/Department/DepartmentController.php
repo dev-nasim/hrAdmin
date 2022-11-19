@@ -28,7 +28,6 @@ class DepartmentController extends Controller
             'department_name' => 'required',
         ]);
 
-
         $model = new Department();
         $model->fill($request->all())->save();
 

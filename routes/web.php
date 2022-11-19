@@ -13,6 +13,7 @@ use App\Http\Controllers\Notice\NoticeController;
 use App\Http\Controllers\Department\DepartmentController;
 use App\Http\Controllers\Department\subDepartmentController;
 use App\Http\Controllers\RoleController;
+use App\Http\Controllers\UserRoleController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -47,5 +48,6 @@ Route::resource('notice', NoticeController::class);
 Route::resource('department', DepartmentController::class);
 Route::resource('subdepartment', subDepartmentController::class);
 Route::resource('role', RoleController::class);
+Route::resource('user_role', UserRoleController::class);
 
 

@@ -35,7 +35,7 @@
             </div>
         </div>
     </li>
-
+    <!-- Nav Item - Role Collapse Menu -->
     <li class="nav-item">
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#role"
            aria-expanded="true" aria-controls="role">
@@ -44,8 +44,21 @@
         </a>
         <div id="role" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
-                <a class="collapse-item" href="{{url('role')}}">List</a>
-                <a class="collapse-item" href="{{url('role/create')}}">Add</a>
+                <a class="collapse-item" href="{{url('role')}}">Role Manage</a>
+            </div>
+        </div>
+    </li>
+
+    <!-- Nav Item - Role Collapse Menu -->
+    <li class="nav-item">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#user_role"
+           aria-expanded="true" aria-controls="user_role">
+            <i class="fa fa-user"></i>
+            <span>User Role</span>
+        </a>
+        <div id="user_role" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+            <div class="bg-white py-2 collapse-inner rounded">
+                <a class="collapse-item" href="{{url('user_role')}}">User Role</a>
             </div>
         </div>
     </li>

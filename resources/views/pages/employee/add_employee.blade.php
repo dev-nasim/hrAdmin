@@ -32,7 +32,6 @@
                             <option value="{{$department->id}}">{{$department->department_name}}</option>
                         @endforeach
                     </select>
-                    <!-- <input type="text" name="department" value="{{Request::old('department_id')}}" class="form-control" id="department"> -->
                     <span class="text-danger">{{$errors->has('department_id') ? $errors->first('department_id') : ''}}</span>
                 </div>
 

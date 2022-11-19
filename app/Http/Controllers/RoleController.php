@@ -25,6 +25,7 @@ class RoleController extends Controller
 
     public function store(RoleRequest $request)
     {
+        $request->role = trim($request->role);
         $model = new Role();
         $model->fill($request->all())->save();
 
@@ -47,8 +48,9 @@ class RoleController extends Controller
         //
     }
 
-    public function destroy($id)
+    public function destroy(Role $role)
     {
-        //
+        $role->delete();
+        return redirect()->route('role.index')->with('success','Role has been deleted successfully');
     }
 }

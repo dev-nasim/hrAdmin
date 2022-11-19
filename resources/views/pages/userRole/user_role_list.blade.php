@@ -1,10 +1,10 @@
 @extends('layouts.master')
 
 @section('content')
-    <h1 class="h3 mb-2 text-gray-800">Role List</h1>
+    <h1 class="h3 mb-2 text-gray-800">User Role List</h1>
     <div class="card shadow mb-4">
         <div class="card-header py-3">
-            <a href="{{url('role/create')}}" type="button" class="btn btn-primary"><i class="fa fa-plus"></i> Add Role</a>
+            <a href="{{url('user_role/create')}}" type="button" class="btn btn-primary"><i class="fa fa-plus"></i>User Add Role</a>
         </div>
         <div class="card-body">
             <div class="table-responsive">
@@ -15,18 +15,20 @@
                     <thead>
                     <tr>
                         <th>SL No.</th>
+                        <th>Name</th>
                         <th>Role</th>
                         <th>Action</th>
                     </tr>
                     </thead>
                     <tbody>
-                    @foreach($roles as $role)
+                    @foreach($user_roles as $user_role)
                         <tr>
-                            <td>{{$role->id}}</td>
-                            <td>{{$role->role}}</td>
+                            <td>{{$user_role->id}}</td>
+                            <td>{{$user_role->user ? $user_role->user->name: ''}}</td>
+                            <td>{{$user_role->user ? $user_role->role->role: ''}}</td>
                             <td>
-                                <form action="{{ route('role.destroy',$role->id) }}" method="Post">
-                                    <a class="btn btn-primary" href="{{ route('role.edit',$role->id) }}"><i class="fa fa-pen"></i></a>
+                                <form action="#" method="Post">
+                                    <a class="btn btn-primary" href="#"><i class="fa fa-pen"></i></a>
                                     @csrf
                                     @method('DELETE')
                                     <button type="submit" onclick="return confirm('Are you sure you want to delete this item?');" class="btn btn-danger"><i class="fa fa-trash"></i></button>

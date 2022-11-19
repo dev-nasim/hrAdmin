@@ -14,11 +14,8 @@ class EmployeeController extends Controller
 
     public function index()
     {
-//        $data['employees'] = Employee::with('department')->paginate(10);
         $data['employees'] = Employee::with(['position','department'])->paginate(10);
-//        dd($data['employees']);
         return view('pages.employee.emp_list',$data);
-
     }
 
     public function create()
@@ -31,9 +28,6 @@ class EmployeeController extends Controller
 
     public function store(EmployeeRequest $request)
     {
-
-
-
         $model = new Employee();
         $model->fill($request->all())->save();
 
