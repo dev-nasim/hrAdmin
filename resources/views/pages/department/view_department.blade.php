@@ -1,12 +1,29 @@
 @extends('layouts.master')
 
 @section('content')
-    <h1 class="h3 mb-2 text-gray-800">Department</h1>
+   <div class="row">
+       <div class="col-md-8 text-left">
+           <h1 class="h3 mb-2 text-gray-800">Department</h1>
+       </div>
+       <div class="col-md-4 text-right">
+           <a href="{{url('department/create')}}" type="button" class="btn btn-primary"><i class="fa fa-plus"></i> Add Department</a>
+       </div>
+   </div>
     <div class="card shadow mb-4">
-        <div class="card-header py-3">
-            <a href="{{url('department/create')}}" type="button" class="btn btn-primary"><i class="fa fa-plus"></i> Add Department</a>
-            
-        </div>
+        <form action="" method="GET">
+            <div class="card-header py-3 row">
+                <div class="col-md-4">
+                    <select name="has_award" class="form-control">
+                        <option value="">Has award</option>
+                        <option value="yes">YES</option>
+                        <option value="no">No</option>
+                    </select>
+                </div>
+                <div class="col-md-1">
+                    <button class="btn btn-outline-primary" type="submit">Search</button>
+                </div>
+            </div>
+        </form>
         <div class="card-body">
             <div class="table-responsive">
                 @if(Session::has('success'))

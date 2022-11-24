@@ -12,7 +12,21 @@ class DepartmentController extends Controller
     
     public function index()
     {
-        $data['departments'] = Department::paginate(10);
+        $has_award = request()->input('has_award');
+
+        $data['departments'] = Department::where(function ($query) use ($has_award){
+            if ($has_award && $has_award == 'yes'){
+                $query->whereHas('employee', function ($empQuery){
+                    $empQuery->whereHas('award');
+                });
+            }
+            if ($has_award && $has_award == 'no'){
+                $query->whereDoesntHave('employee', function ($empQuery){
+                    $empQuery->whereDoesntHave('award');
+                });
+            }
+        })->paginate(10);
+
         return view('pages.department.view_department',$data);
     }
 
@@ -24,9 +38,9 @@ class DepartmentController extends Controller
 
     public function store(Request $request)
     {
-        $this->validate($request,[
-            'department_name' => 'required',
-        ]);
+        $model = new Department();
+
+        $this->validate($request,$model->validationRules());
 
         $model = new Department();
         $model->fill($request->all())->save();

@@ -30,24 +30,32 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return redirect('login');
 });
+Route::get('/home', function () {
+    return redirect('dashboard');
+});
 
-Route::get('login', [LoginController::class, 'showLoginForm']);
+Route::get('login', [LoginController::class, 'showLoginForm'])->name('login')->middleware('guest');
 Route::post('login', [LoginController::class, 'submitLogin']);
 
-Route::get('logout', [LoginController::class, 'logout']);
+Route::middleware('checkAuth')->group(function (){
+    Route::get('logout', [LoginController::class, 'logout']);
 
-Route::get('dashboard', [DashboardController::class, 'index']);
-Route::resource('users', UserController::class);
-Route::resource('employee', EmployeeController::class);
-Route::resource('possition', EmpPossitionController::class);
-Route::resource('award', AwardController::class);
-Route::resource('weekly_holiday', WeeklyHolidayController::class);
-Route::resource('holiday', HolidayController::class);
-Route::resource('leave_application', LeaveApplicationController::class);
-Route::resource('notice', NoticeController::class);
-Route::resource('department', DepartmentController::class);
-Route::resource('subdepartment', subDepartmentController::class);
-Route::resource('role', RoleController::class);
-Route::resource('user_role', UserRoleController::class);
+    Route::get('dashboard', [DashboardController::class, 'index']);
+    Route::resource('users', UserController::class);
+    Route::resource('employee', EmployeeController::class);
+    Route::resource('possition', EmpPossitionController::class);
+    Route::resource('award', AwardController::class);
+    Route::resource('weekly_holiday', WeeklyHolidayController::class);
+    Route::resource('holiday', HolidayController::class);
+    Route::resource('leave_application', LeaveApplicationController::class);
+    Route::resource('notice', NoticeController::class);
+    Route::resource('department', DepartmentController::class);
+    Route::resource('subdepartment', subDepartmentController::class);
+
+    Route::middleware('age')->group(function (){
+        Route::resource('role', RoleController::class);
+        Route::resource('user_role', UserRoleController::class);
+    });
+});
 
 
