@@ -24,4 +24,9 @@ class Employee extends Model
         return $this->belongsTo(Possition::class, 'possition_id', 'id');
     }
 
+    public function award()
+    {
+        return $this->hasMany(Award::class, 'employee_id', 'id');
+    }
+
 }

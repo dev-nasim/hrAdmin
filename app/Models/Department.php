@@ -10,6 +10,12 @@ class Department extends Model
     use HasFactory;
     protected $fillable=['department_name'];
 
+    public function validationRules(){
+        return [
+            'department_name' => 'required',
+        ];
+    }
+
     public function employee()
     {
         // class, foregin key, local key
