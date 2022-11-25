@@ -8,14 +8,26 @@ use Illuminate\Http\Request;
 use App\Http\Requests\UserRequest;
 use Illuminate\Support\Facades\Hash;
 use Session;
+use function Symfony\Component\Finder\in;
 
 class UserController extends Controller
 {
 
     public function index()
     {
-        $data['users']= User::get();
-        return view('pages.users.userList',$data);
+        $keyword = request()->input('keyword');
+
+        $data['users']= User::where(function ($query) use ($keyword){
+            if ($keyword){
+                $query->where('name','LIKE',"%$keyword%");
+            }
+        })->get();
+
+        if (\request()->ajax()){
+            return view('pages.users.userListAjaxData',$data);
+        }else{
+            return view('pages.users.userList',$data);
+        }
     }
 
     public function create()
@@ -35,6 +47,13 @@ class UserController extends Controller
         $model->fill($userArray);
         $model->save();
 
+        if ($request->ajax()){
+            return response()->json([
+                'status'=>2000,
+                'message'=>'Successfully Inserted'
+            ]);
+        }
+
         Session::flash('success', 'User Inserted');
         return redirect('users');
     }
@@ -46,13 +65,28 @@ class UserController extends Controller
 
     public function edit($id)
     {
-        //
+       $data['user'] = User::where('id', $id)->first();
+
+       if ($data['user']){
+           return view('pages.users.userForm', $data);
+       }
+
+       return redirect('users');
     }
 
 
     public function update(Request $request, $id)
     {
-        //
+       $user = User::where('id', $request->input('user_id'))->first();
+       if ($user){
+           $user->fill($request->all());
+           $user->save();
+
+           Session::flash('success', 'User Inserted');
+           return redirect('users');
+       }
+
+        return redirect('users');
     }
 
     public function destroy($id)

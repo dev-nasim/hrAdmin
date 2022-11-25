@@ -2,8 +2,10 @@
 
 namespace App\Http\Middleware;
 
+use Carbon\Carbon;
 use Closure;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\App;
 
 class ageRestrictMiddleware
 {
@@ -16,8 +18,13 @@ class ageRestrictMiddleware
      */
     public function handle(Request $request, Closure $next)
     {
-        $age = auth()->user()->age;
-        if ($age == 12){
+        $birthday = auth()->user()->birthday;
+        $dbDate = Carbon::parse($birthday);
+        $diffYears = \Carbon\Carbon::now()->diffInYears($dbDate);
+
+        App::setLocale('bn');
+
+        if ($diffYears >= 10){
             return $next($request);
         }
 

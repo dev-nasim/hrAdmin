@@ -103,6 +103,14 @@
 <!-- Page level custom scripts -->
 <script src="{{asset('assets/js/demo/chart-area-demo.js')}}"></script>
 <script src="{{asset('assets/js/demo/chart-pie-demo.js')}}"></script>
+<script src="{{asset('assets/js/jquery.toaster.js')}}"></script>
+<script>
+    $.ajaxSetup({
+        data: {
+            _token: '{{csrf_token()}}',
+        },
+    });
+</script>
 @yield('script')
 </body>
 
