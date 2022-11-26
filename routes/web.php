@@ -37,7 +37,7 @@ Route::get('/home', function () {
 Route::get('login', [LoginController::class, 'showLoginForm'])->name('login')->middleware('guest');
 Route::post('login', [LoginController::class, 'submitLogin']);
 
-Route::middleware('checkAuth')->group(function (){
+Route::middleware(['checkAuth','age'])->group(function (){
     Route::get('logout', [LoginController::class, 'logout']);
 
     Route::get('dashboard', [DashboardController::class, 'index']);
@@ -52,10 +52,8 @@ Route::middleware('checkAuth')->group(function (){
     Route::resource('department', DepartmentController::class);
     Route::resource('subdepartment', subDepartmentController::class);
 
-    Route::middleware('age')->group(function (){
-        Route::resource('role', RoleController::class);
-        Route::resource('user_role', UserRoleController::class);
-    });
+    Route::resource('role', RoleController::class);
+    Route::resource('user_role', UserRoleController::class);
 });
 
 
