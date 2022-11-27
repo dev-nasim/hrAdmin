@@ -33,6 +33,8 @@ class UserController extends Controller
     public function create()
     {
         return view('pages.users.userForm');
+
+
     }
 
     public function store(UserRequest $request)
@@ -68,7 +70,13 @@ class UserController extends Controller
        $data['user'] = User::where('id', $id)->first();
 
        if ($data['user']){
-           return view('pages.users.userForm', $data);
+        if(request()->ajax()){
+            if(request()->input('type') && request()->input('type') == 2){
+                return response()->json($data['user']);
+            }
+            return view('pages.users.userFormAjax', $data);
+        }
+        return view('pages.users.userForm', $data);
        }
 
        return redirect('users');
@@ -81,6 +89,13 @@ class UserController extends Controller
        if ($user){
            $user->fill($request->all());
            $user->save();
+
+           if(request()->ajax()){
+            return response()->json([
+                'status'=>2000,
+                'message'=>'Successfully Updated'
+            ]);
+           }
 
            Session::flash('success', 'User Inserted');
            return redirect('users');

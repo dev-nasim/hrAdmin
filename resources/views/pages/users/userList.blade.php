@@ -1,12 +1,13 @@
 @extends('layouts.master')
-
 @section('content')
     <div class="row">
         <div class="col-md-8 text-left">
             <h1 class="h3 mb-2 text-gray-800">User List</h1>
         </div>
         <div class="col-md-4 text-right">
-            <a href="{{url('users/create')}}" type="button" class="btn btn-primary"><i class="fa fa-plus"></i> Add User</a>
+            <a href="{{ url('users/create') }}" type="button" data-toggle="modal" data-target="#exampleModal"
+                class="btn btn-primary"><i class="fa fa-plus"></i> Add
+                User</a>
         </div>
     </div>
     <div class="card shadow mb-4">
@@ -22,57 +23,77 @@
         </div>
         <div class="card-body">
             <div class="table-responsive">
-                @if(Session::has('success'))
+                @if (Session::has('success'))
                     <p class="alert alert-info">{{ Session::get('success') }}</p>
                 @endif
                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                     <thead>
-                    <tr>
-                        <th>SL No.</th>
-                        <th>Name</th>
-                        <th>Email</th>
-                        <th>Role</th>
-                        <th>Action</th>
-                    </tr>
+                        <tr>
+                            <th>SL No.</th>
+                            <th>Name</th>
+                            <th>Email</th>
+                            <th>Birthday</th>
+                            <th>Role</th>
+                            <th>Action</th>
+                        </tr>
                     </thead>
-                    <tbody id="userListBody">
-{{--                    @foreach($users as $user)--}}
-{{--                        <tr>--}}
-{{--                            <td>{{$user->id}}</td>--}}
-{{--                            <td>{{$user->name}}</td>--}}
-{{--                            <td>{{$user->email}}</td>--}}
-{{--                            <td></td>--}}
-{{--                            <td>--}}
-{{--                                <a class="btn btn-outline-warning" href="{{url("users/$user->id/edit")}}">Edit</a>--}}
-{{--                            </td>--}}
-{{--                        </tr>--}}
-{{--                    @endforeach--}}
-                    </tbody>
+                    <tbody id="userListBody"></tbody>
                 </table>
+            </div>
+        </div>
+    </div>
+    <div class="modal" id="editModal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Edit Modal</h4>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+                <div class="modal-body" id="editData"></div>
+                <div class="modal-footer">
+                    <button id="dataUpdate" modal-id="editModal" type="button" class="btn btn-success">Update</button>
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal" id="editModal2">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Edit Modal</h4>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <form id="userEditForm" action="" method="post">
+                        <input type="hidden" class="form-control" name="user_id">
+                        <div class="form-group">
+                            <label for="name">Name:</label>
+                            <input type="text" class="form-control" name="name" id="name">
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email:</label>
+                            <input type="email" autocomplete="off" name="email" class="form-control">
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Birthday:</label>
+                            <input type="date" name="birthday"class="form-control">
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button id="dataUpdate" modal-id="editModal2" type="button" class="btn btn-success">Update</button>
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                </div>
+
             </div>
         </div>
     </div>
 @endsection
 @section('script')
     <script>
-        var targetInput = $('#keyword');
-        loadAjaxData();
-        function loadAjaxData() {
-            var keyword = targetInput.val();
-            var URL = `{{url('users')}}?keyword=${keyword}`;
-            $.ajax({
-                url: URL,
-                type: "get",
-                success: function (response) {
-                    $('#userListBody').html(response);
-                },
-                error: function (jqXHR, textStatus, errorThrown) {
-                    console.log(textStatus, errorThrown);
-                }
-            });
-        }
-        targetInput.on('keyup', function () {
-            loadAjaxData();
-        });
+        window.dataUser = '{{ url('users') }}';
+        window.csrfToken = '{{ csrf_token() }}';
     </script>
+    <script src="{{ asset('assets/scripts/users.js') }}"></script>
 @endsection
