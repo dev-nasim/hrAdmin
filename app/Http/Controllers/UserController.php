@@ -43,9 +43,9 @@ class UserController extends Controller
         $userArray = [
             'name'=>$request->name,
             'email'=>$request->email,
+            'birthday'=>$request->birthday,
             'password'=>Hash::make($request->password),
         ];
-
         $model->fill($userArray);
         $model->save();
 

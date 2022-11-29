@@ -23,7 +23,7 @@
                     <tbody>
                     @foreach($possitions as $possition)
                     <tr>
-                        <td>{{$possition->id}}</td>
+                        <td>{{ $loop->iteration }}</td>
                         <td>{{$possition->possition}}</td>
                         <td>{{$possition->possition_details}}</td>
                         <td>

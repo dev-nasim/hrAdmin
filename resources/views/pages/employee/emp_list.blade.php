@@ -28,7 +28,7 @@
                     <tbody>
                         @foreach($employees as $employee)
                     <tr>
-                        <td>{{$employee->id}}</td>
+                        <td>{{ $loop->iteration }}</td>
                         <td>{{$employee->name}}</td>
                         <td>{{$employee->position ? $employee->position->possition: ''}}</td>
                         <td>{{$employee->email}}</td>

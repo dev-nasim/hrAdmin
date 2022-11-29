@@ -25,7 +25,7 @@
                     <tbody>
                     @foreach($notics as $notic)
                     <tr>
-                        <td>{{$notic->id}}</td>
+                        <td>{{ $loop->iteration }}</td>
                         <td>{{$notic->notice_type}}</td>
                         <td>{{$notic->description}}</td>
                         <td>{{$notic->notice_date}}</td>

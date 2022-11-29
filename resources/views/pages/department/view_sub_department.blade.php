@@ -24,7 +24,7 @@
                     <tbody>
                     @foreach($subdepartments as $subdepartment)
                     <tr>
-                        <td>{{$subdepartment->id}}</td>
+                        <td>{{ $loop->iteration }}</td>
                         <td>{{$subdepartment->sub_department}}</td>
                         <td>{{$subdepartment->department}}</td>
                         <td>

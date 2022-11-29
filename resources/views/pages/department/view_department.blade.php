@@ -40,7 +40,7 @@
                     <tbody>
                         @foreach($departments as $department)
                     <tr>
-                        <td>{{$department->id}}</td>
+                        <td>{{ $loop->iteration }}</td>
                         <td>{{$department->department_name}}</td>
                         <td>
                             <form action="{{ route('department.destroy',$department->id) }}" method="Post">

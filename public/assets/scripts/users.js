@@ -19,6 +19,13 @@ targetInput.on('keyup', function() {
     loadAjaxData();
 });
 
+
+// ===================================================
+//                 User Data Edit Json
+// ===================================================
+
+
+
 $(document).on("click", '.editButton', function(event) {
     var id = $(this).attr('id');
     var URL = `${dataUser}/${id}/edit`;
@@ -36,25 +43,10 @@ $(document).on("click", '.editButton', function(event) {
     });
 });
 
-$(document).on("click", '.editButton2', function(event) {
-    var id = $(this).attr('id');
-    var URL = `${dataUser}/${id}/edit?type=2`;
-    $('#editData').html('');
-    $.ajax({
-        url: URL,
-        type: "get",
-        success: function(response) {
-            $('#editModal2').modal('show');
-            $("input[name=user_id]").val(response.id)
-            $("#name").val(response.name);
-            $("input[name=email]").val(response.email);
-            $("input[name=birthday]").val(response.birthday);
-        },
-        error: function(jqXHR, textStatus, errorThrown) {
-            console.log(textStatus, errorThrown);
-        }
-    });
-});
+// ===================================================
+//                 User Data Update Json
+// ===================================================
+
 
 $(document).on("click", '#dataUpdate', function(event) {
     var id = $("input[name=user_id]").val();
@@ -82,5 +74,34 @@ $(document).on("click", '#dataUpdate', function(event) {
         error: function(jqXHR, textStatus, errorThrown) {
             console.log(textStatus, errorThrown);
         }
+    });
+});
+
+
+// ===================================================
+//                 User Add Json
+// ===================================================
+
+$(document).ready(function () {
+    $('#add_user').on('submit', function(e) {
+        e.preventDefault();
+        $.ajax({
+            type: "POST",
+            url: "/users",
+            data: $('#add_user').serialize(),
+            success: function (response) {
+                console.log(response)
+                $('#add_modal').modal('hide')
+                $.toaster({
+                    priority: 'success',
+                    title: 'Success',
+                    message: response.message
+                });
+                loadAjaxData();
+            },
+            error: function (jqXHR, textStatus, errorThrown) {
+                $.toaster({ priority : 'warning', title : 'warning', message : 'Validation failed'});
+            }
+        });
     });
 });

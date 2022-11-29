@@ -28,7 +28,7 @@
                     <tbody>
                     @foreach($awards as $award)
                     <tr>
-                        <td>{{$award->id}}</td>
+                        <td>{{ $loop->iteration }}</td>
                         <td>{{$award->awd_name}}</td>
                         <td>{{$award->awd_des}}</td>
                         <td>{{$award->employee ? $award->employee->name :  'NA'}}</td>

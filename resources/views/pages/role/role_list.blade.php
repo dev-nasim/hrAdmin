@@ -22,7 +22,7 @@
                     <tbody>
                     @foreach($roles as $role)
                         <tr>
-                            <td>{{$role->id}}</td>
+                            <td>{{ $loop->iteration }}</td>
                             <td>{{$role->role}}</td>
                             <td>
                                 <form action="{{ route('role.destroy',$role->id) }}" method="Post">

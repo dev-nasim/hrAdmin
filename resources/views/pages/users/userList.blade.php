@@ -5,8 +5,7 @@
             <h1 class="h3 mb-2 text-gray-800">User List</h1>
         </div>
         <div class="col-md-4 text-right">
-            <a href="{{ url('users/create') }}" type="button" data-toggle="modal" data-target="#exampleModal"
-                class="btn btn-primary"><i class="fa fa-plus"></i> Add
+            <a type="button" class="btn btn-outline-info" data-toggle="modal" data-target="#add_modal"><i class="fa fa-plus"></i> Add
                 User</a>
         </div>
     </div>
@@ -33,7 +32,6 @@
                             <th>Name</th>
                             <th>Email</th>
                             <th>Birthday</th>
-                            <th>Role</th>
                             <th>Action</th>
                         </tr>
                     </thead>
@@ -42,8 +40,8 @@
             </div>
         </div>
     </div>
-    <div class="modal" id="editModal">
-        <div class="modal-dialog">
+    <div class="modal fade" id="editModal">
+        <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
                     <h4 class="modal-title">Edit Modal</h4>
@@ -52,43 +50,60 @@
                 <div class="modal-body" id="editData"></div>
                 <div class="modal-footer">
                     <button id="dataUpdate" modal-id="editModal" type="button" class="btn btn-success">Update</button>
-                    <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
                 </div>
             </div>
         </div>
     </div>
-    <div class="modal" id="editModal2">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h4 class="modal-title">Edit Modal</h4>
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
-                </div>
-                <div class="modal-body">
-                    <form id="userEditForm" action="" method="post">
-                        <input type="hidden" class="form-control" name="user_id">
-                        <div class="form-group">
-                            <label for="name">Name:</label>
-                            <input type="text" class="form-control" name="name" id="name">
-                        </div>
-                        <div class="form-group">
-                            <label for="email">Email:</label>
-                            <input type="email" autocomplete="off" name="email" class="form-control">
-                        </div>
-                        <div class="form-group">
-                            <label for="email">Birthday:</label>
-                            <input type="date" name="birthday"class="form-control">
-                        </div>
-                    </form>
-                </div>
-                <div class="modal-footer">
-                    <button id="dataUpdate" modal-id="editModal2" type="button" class="btn btn-success">Update</button>
-                    <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
-                </div>
 
+{{--    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">--}}
+{{--        Open modal--}}
+{{--    </button>--}}
+
+    <!-- The User Add Modal -->
+    <div class="container">
+        <div class="modal fade" id="add_modal">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title">Add User</h4>
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    </div>
+                    <form id="add_user">
+                        @csrf
+                        <div class="modal-body">
+                            <div class="form-group">
+                                <label for="name">Name:</label>
+                                <input type="text" class="form-control" name="name" id="name">
+                                <span class="text-danger">{{ $errors->has('name') ? $errors->first('name') : '' }}</span>
+                            </div>
+                            <div class="form-group">
+                                <label for="email">Email:</label>
+                                <input type="email" autocomplete="off" name="email" class="form-control">
+                                <span class="text-danger">{{ $errors->has('email') ? $errors->first('email') : '' }}</span>
+                            </div>
+                            <div class="form-group">
+                                <label for="email">Birthday:</label>
+                                <input type="date" name="birthday" class="form-control">
+                                <span class="text-danger">{{ $errors->has('birthday') ? $errors->first('birthday') : '' }}</span>
+                            </div>
+                            <div class="form-group">
+                                <label for="password">Password:</label>
+                                <input type="password" name="password" class="form-control">
+                                <span class="text-danger">{{ $errors->has('password') ? $errors->first('password') : '' }}</span>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="submit" class="btn btn-info">Submit</button>
+                            </div>
+                        </div>
+
+                    </form>
+
+                </div>
             </div>
         </div>
     </div>
+
+
 @endsection
 @section('script')
     <script>

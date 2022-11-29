@@ -23,7 +23,7 @@
                     <tbody>
                     @foreach($user_roles as $user_role)
                         <tr>
-                            <td>{{$user_role->id}}</td>
+                            <td>{{ $loop->iteration }}</td>
                             <td>{{$user_role->user ? $user_role->user->name: ''}}</td>
                             <td>{{$user_role->role ? $user_role->role->role: ''}}</td>
                             <td>
