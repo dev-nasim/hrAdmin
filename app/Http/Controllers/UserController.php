@@ -71,7 +71,7 @@ class UserController extends Controller
 
        if ($data['user']){
         if(request()->ajax()){
-            if(request()->input('type') && request()->input('type') == 2){
+            if(request()->input('type')){
                 return response()->json($data['user']);
             }
             return view('pages.users.userFormAjax', $data);
@@ -106,6 +106,14 @@ class UserController extends Controller
 
     public function destroy($id)
     {
-        //
+
+        $data['user'] = User::where('id', $id)->delete();
+
+        if(request()->ajax()){
+            return response()->json([
+                'status'=>2000,
+                'message'=>'Successfully Deleted'
+            ]);
+        }
     }
 }

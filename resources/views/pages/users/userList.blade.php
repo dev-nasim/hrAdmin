@@ -5,7 +5,8 @@
             <h1 class="h3 mb-2 text-gray-800">User List</h1>
         </div>
         <div class="col-md-4 text-right">
-            <a type="button" class="btn btn-outline-info" data-toggle="modal" data-target="#add_modal"><i class="fa fa-plus"></i> Add
+            <a type="button" class="btn btn-outline-info" data-toggle="modal" data-target="#add_modal"><i
+                    class="fa fa-plus"></i> Add
                 User</a>
         </div>
     </div>
@@ -55,9 +56,9 @@
         </div>
     </div>
 
-{{--    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">--}}
-{{--        Open modal--}}
-{{--    </button>--}}
+    {{--    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal"> --}}
+    {{--        Open modal --}}
+    {{--    </button> --}}
 
     <!-- The User Add Modal -->
     <div class="container">
@@ -68,9 +69,9 @@
                         <h4 class="modal-title">Add User</h4>
                         <button type="button" class="close" data-dismiss="modal">&times;</button>
                     </div>
-                    <form id="add_user">
-                        @csrf
-                        <div class="modal-body">
+                    <div class="modal-body">
+                        <form id="add_user">
+                            @csrf
                             <div class="form-group">
                                 <label for="name">Name:</label>
                                 <input type="text" class="form-control" name="name" id="name">
@@ -84,26 +85,44 @@
                             <div class="form-group">
                                 <label for="email">Birthday:</label>
                                 <input type="date" name="birthday" class="form-control">
-                                <span class="text-danger">{{ $errors->has('birthday') ? $errors->first('birthday') : '' }}</span>
+                                <span
+                                    class="text-danger">{{ $errors->has('birthday') ? $errors->first('birthday') : '' }}</span>
                             </div>
                             <div class="form-group">
                                 <label for="password">Password:</label>
                                 <input type="password" name="password" class="form-control">
-                                <span class="text-danger">{{ $errors->has('password') ? $errors->first('password') : '' }}</span>
+                                <span
+                                    class="text-danger">{{ $errors->has('password') ? $errors->first('password') : '' }}</span>
                             </div>
                             <div class="modal-footer">
                                 <button type="submit" class="btn btn-info">Submit</button>
                             </div>
-                        </div>
-
-                    </form>
+                        </form>
+                    </div>
 
                 </div>
             </div>
         </div>
     </div>
 
-
+    {{-- delete user --}}
+    <div class="modal fade" id="deleteModal">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Delete Modal</h4>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+                <div class="modal-body" id="deleteData">
+                    <h4>Are you sure? want to delete this data..!!</h4>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal" id="btCancel">No</button>
+                    <button id="btConfirm" modal-id="deleteModal" type="button" class="btn btn-success">Yes</button>
+                </div>
+            </div>
+        </div>
+    </div>
 @endsection
 @section('script')
     <script>
