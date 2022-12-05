@@ -71,14 +71,9 @@ class UserController extends Controller
 
        if ($data['user']){
         if(request()->ajax()){
-            if(request()->input('type')){
-                return response()->json($data['user']);
-            }
             return view('pages.users.userFormAjax', $data);
         }
-        return view('pages.users.userForm', $data);
        }
-
        return redirect('users');
     }
 
@@ -97,7 +92,7 @@ class UserController extends Controller
             ]);
            }
 
-           Session::flash('success', 'User Inserted');
+           Session::flash('success', 'User Updated');
            return redirect('users');
        }
 

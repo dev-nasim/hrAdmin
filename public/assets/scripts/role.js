@@ -7,7 +7,7 @@ function loadAjaxData() {
         url: URL,
         type: "get",
         success: function(response) {
-            $('#userListBody').html(response);
+            $('#roleListBody').html(response);
         },
         error: function(jqXHR, textStatus, errorThrown) {
             console.log(textStatus, errorThrown);
@@ -19,19 +19,22 @@ targetInput.on('keyup', function() {
 });
 
 
+// ===================================================
+//                 Role Data Delete Json
+// ===================================================
+
+
 $(document).on("click", '.deleteButton', function(event) {
+    event.preventDefault();
     var id = $(this).attr('id');
     var URL = `${dataUser}/${id}`;
-
-
     $('#deleteModal').modal('show');
-
     $('#deleteModal').on('hide.bs.modal', function(event) {
-        $('#btConfirm').off('click')
-
-    })
+        $('#btConfirm').off('click');
+    });
 
     $('#btConfirm').on('click', function(event) {
+        event.preventDefault();
         $('#deleteModal').modal('hide');
         $('#btConfirm').off('click')
         $.ajax({
@@ -44,9 +47,9 @@ $(document).on("click", '.deleteButton', function(event) {
                         title: 'Successfull',
                         message: response.message
                     });
+                    loadAjaxData();
                 }
-
-                loadAjaxData();
+                // location.reload();
             },
 
         });
@@ -55,12 +58,39 @@ $(document).on("click", '.deleteButton', function(event) {
 });
 
 
+// ===================================================
+//                 Role Add Json
+// ===================================================
 
+
+$(document).ready(function () {
+    $('#add_role').on('submit', function(e) {
+        e.preventDefault();
+        $.ajax({
+            type: "POST",
+            url: "/role",
+            data: $('#add_role').serialize(),
+            success: function (response) {
+                console.log(response)
+                $('#add_modal').modal('hide')
+                $.toaster({
+                    priority: 'success',
+                    title: 'Success',
+                    message: response.message
+                });
+                loadAjaxData();
+            },
+            error: function (jqXHR, textStatus, errorThrown) {
+                $.toaster({ priority : 'warning', title : 'warning', message : 'Validation failed'});
+            }
+        });
+    });
+});
 
 
 
 // ===================================================
-//                 User Data Edit Json
+//                 Role Data Edit Json
 // ===================================================
 
 
@@ -83,22 +113,19 @@ $(document).on("click", '.editButton', function(event) {
 });
 
 // ===================================================
-//                 User Data Update Json
+//                 Role Data Update Json
 // ===================================================
 
-
 $(document).on("click", '#dataUpdate', function(event) {
-    var id = $("input[name=user_id]").val();
+    var id = $("input[name=role_id]").val();
     var modal = $(this).attr('modal-id');
     var URL = `${dataUser}/${id}`;
     $.ajax({
         url: URL,
         type: "PUT",
         data: {
-            user_id: id,
-            name: $("#name").val(),
-            email: $("input[name=email]").val(),
-            birthday: $("input[name=birthday]").val(),
+            role_id: id,
+            role: $("input[name=role]").val(),
             _token: csrfToken,
         },
         success: function(response) {
@@ -113,34 +140,5 @@ $(document).on("click", '#dataUpdate', function(event) {
         error: function(jqXHR, textStatus, errorThrown) {
             console.log(textStatus, errorThrown);
         }
-    });
-});
-
-
-// ===================================================
-//                 User Add Json
-// ===================================================
-
-$(document).ready(function () {
-    $('#add_user').on('submit', function(e) {
-        e.preventDefault();
-        $.ajax({
-            type: "POST",
-            url: "/users",
-            data: $('#add_user').serialize(),
-            success: function (response) {
-                console.log(response)
-                $('#add_modal').modal('hide')
-                $.toaster({
-                    priority: 'success',
-                    title: 'Success',
-                    message: response.message
-                });
-                loadAjaxData();
-            },
-            error: function (jqXHR, textStatus, errorThrown) {
-                $.toaster({ priority : 'warning', title : 'warning', message : 'Validation failed'});
-            }
-        });
     });
 });
