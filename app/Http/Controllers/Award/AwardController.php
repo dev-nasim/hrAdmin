@@ -11,11 +11,16 @@ use Illuminate\Support\Facades\Session;
 class AwardController extends Controller
 {
 
-    public function index()
+    public function index(Request $request)
     {
-        $data['awards'] = Award::paginate(10);
+        $data['employees'] = Employee::get();
+        $data['awards']= Award::get();
+        if($request->ajax()) {
+            return view('pages.award.Ajaxdata', $data);
+        }
         return view('pages.award.award_list',$data);
     }
+
     public function create()
     {
         $data['employees'] = Employee::get();
@@ -34,7 +39,15 @@ class AwardController extends Controller
             'awd_by' => 'required',
         ]);
         $model = new Award();
-        $model->fill($request->all())->save();
+        $model->fill($request->all());
+        $model->save();
+
+        if ($request->ajax()){
+            return response()->json([
+                'status'=>2000,
+                'message'=>'Successfully Inserted'
+            ]);
+        }
 
         Session::flash('success', 'Award Inserted');
         return redirect('award');
@@ -48,31 +61,49 @@ class AwardController extends Controller
     public function edit($id)
     {
         $data['employees'] = Employee::get();
-        $award = Award::find($id);
-        return view('pages.award.edit_award',$data)->with('awards', $award);
+        $data['award'] = Award::where('id', $id)->first();
+
+        if ($data['award']){
+            if(request()->ajax()){
+                if(request()->input('type')){
+                    return response()->json($data['award']);
+                }
+                return view('pages.award.FormAjax', $data);
+            }
+            return view('pages.award.edit_award', $data);
+        }
+        return redirect('award');
     }
 
     public function update(Request $request, Award $award)
     {
-        $this->validate($request,[
-            'awd_name' => 'required',
-            'awd_des' => 'required',
-            'employee_id' => 'required',
-            'awd_item' => 'required',
-            'awd_date' => 'required',
-            'awd_by' => 'required',
-        ]);
+        $award = Award::where('id', $request->input('award_id'))->first();
+        if ($award){
+            $award->fill($request->all());
+            $award->save();
 
-        $award->update($request->all());
-        return redirect()->route('award.index')->with('success', 'Award Updated successfully');
+            if(request()->ajax()){
+                return response()->json([
+                    'status'=>2000,
+                    'message'=>'Successfully Updated'
+                ]);
+            }
+            Session::flash('success', 'Award Updated');
+            return redirect('award');
+        }
 
-        Session::flash('success', 'Award updated');
         return redirect('award');
     }
 
-    public function destroy(Award $award)
+    public function destroy($id)
     {
-        $award->delete();
-        return redirect()->route('award.index')->with('success','Award Delete Successfully');
+        $data['award'] = Award::where('id', $id)->delete();
+
+        if(request()->ajax()){
+            return response()->json([
+                'status'=>2000,
+                'message'=>'Successfully Deleted'
+            ]);
+        }
     }
 }
