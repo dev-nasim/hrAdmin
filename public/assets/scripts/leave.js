@@ -1,3 +1,7 @@
+// ===================================================
+//                AJax loading Function
+// ===================================================
+
 var targetInput = $('#keyword');
 loadAjaxData();
 
@@ -19,6 +23,9 @@ targetInput.on('keyup', function() {
     loadAjaxData();
 });
 
+// ===================================================
+//                Leave Add Ajax Json
+// ===================================================
 
 $(document).ready(function () {
     $('#add_leave').on('submit', function(e) {
@@ -44,6 +51,9 @@ $(document).ready(function () {
     });
 });
 
+// ===================================================
+//                 Leave  Edit Json
+// ===================================================
 
 $(document).on("click", '.editButton', function(event) {
     var id = $(this).attr('id');
@@ -62,7 +72,9 @@ $(document).on("click", '.editButton', function(event) {
     });
 });
 
-
+// ===================================================
+//                  Leave DELETE Json
+// ===================================================
 
 $(document).on("click", '.deleteButton', function(event) {
     var id = $(this).attr('id');
@@ -97,6 +109,9 @@ $(document).on("click", '.deleteButton', function(event) {
 
 });
 
+// ===================================================
+//                 LEave Data Update Json
+// ===================================================
 
 $(document).on("click", '#dataUpdate', function(event) {
     var id = $("input[name=leave_id]").val();
