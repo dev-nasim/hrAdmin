@@ -47,7 +47,7 @@ Route::middleware(['checkAuth','age'])->group(function (){
     Route::resource('award', AwardController::class);
     Route::resource('weekly_holiday', WeeklyHolidayController::class);
     Route::resource('holiday', HolidayController::class);
-    Route::resource('leave_application', LeaveApplicationController::class);
+    Route::resource('leave', LeaveApplicationController::class);
     Route::resource('notice', NoticeController::class);
     Route::resource('department', DepartmentController::class);
     Route::resource('subdepartment', subDepartmentController::class);
