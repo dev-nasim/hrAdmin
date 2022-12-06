@@ -5,11 +5,11 @@ namespace App\Http\Controllers\Department;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Department;
-use Session;
+use Illuminate\Support\Facades\Session;
 
 class DepartmentController extends Controller
 {
-    
+
     public function index()
     {
         $has_award = request()->input('has_award');

@@ -4,11 +4,11 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Possition;
-use Session;
+use Illuminate\Support\Facades\Session;
 
 class EmpPossitionController extends Controller
 {
-    
+
     public function index()
     {
         $data['possitions'] = Possition::paginate(10);
@@ -25,7 +25,7 @@ class EmpPossitionController extends Controller
         $this->validate($request,[
             'possition' => 'required',
             'possition_details' => 'required',
-            
+
         ]);
 
 
