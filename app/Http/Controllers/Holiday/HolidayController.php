@@ -13,13 +13,13 @@ class HolidayController extends Controller
     public function index()
     {
         $data['holidays'] = Holiday::paginate(10);
-        return view('pages.leave.holiday_view', $data);
+        return view('pages.holiday.holiday_view', $data);
     }
 
     public function create()
     {
 
-        return view('pages.leave.add_holiday');
+        return view('pages.holiday.add_holiday');
     }
 
     public function store(Request $request)
@@ -47,7 +47,7 @@ class HolidayController extends Controller
 
     public function edit(Holiday $holiday)
     {
-        return view('pages.leave.edit_holiday',compact('holiday'));
+        return view('pages.holiday.edit_holiday',compact('holiday'));
     }
 
     public function update(Request $request, Holiday $holiday)
