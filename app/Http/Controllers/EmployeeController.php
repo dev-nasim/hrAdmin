@@ -12,10 +12,16 @@ use App\Http\Requests\EmployeeRequest;
 class EmployeeController extends Controller
 {
 
-    public function index()
+    public function index(Request $request)
     {
-        $data['employees'] = Employee::with(['position','department'])->paginate(10);
+        $data['departments'] = Department::get();
+        $data['positions'] = Possition::get();
+        $data['employees'] = Employee::get();
+        if($request->ajax()) {
+            return view('pages.employee.AjaxEmpData', $data);
+        }
         return view('pages.employee.emp_list',$data);
+
     }
 
     public function create()
@@ -25,11 +31,18 @@ class EmployeeController extends Controller
         return view('pages.employee.add_employee',$data);
     }
 
-
     public function store(EmployeeRequest $request)
     {
         $model = new Employee();
-        $model->fill($request->all())->save();
+        $model->fill($request->all());
+        $model->save();
+
+        if ($request->ajax()){
+            return response()->json([
+                'status'=>2000,
+                'message'=>'Successfully Inserted'
+            ]);
+        }
 
         Session::flash('success', 'Employee Inserted');
         return redirect('employee');
@@ -44,29 +57,49 @@ class EmployeeController extends Controller
     {
         $data['departments'] = Department::get();
         $data['positions'] = Possition::get();
-        $employee = Employee::find($id);
-        return view('pages.employee.edit_emp',$data)->with('employees', $employee);
+        $data['employee'] = Employee::where('id', $id)->first();
+
+        if ($data['employee']){
+            if(request()->ajax()){
+                if(request()->input('type')){
+                    return response()->json($data['employee']);
+                }
+                return view('pages.employee.EditAjaxEmp', $data);
+            }
+            return view('pages.employee.edit_emp', $data);
+        }
+        return redirect('employee');
     }
 
-    public function update(Request $request,Employee $employee)
+    public function update(Request $request, Employee $employee)
     {
-        $request->validate([
-            'name' => 'required',
-            'email' => 'required|email',
-            'phone' => 'required|numeric',
-            'department_id' => 'required',
-//            'possition' => 'required',
-            'designation' => 'required',
-        ]);
+        $employee = Employee::where('id', $request->input('employee_id'))->first();
+        if ($employee){
+            $employee->fill($request->all());
+            $employee->save();
 
-        $employee->update($request->all());
+            if(request()->ajax()){
+                return response()->json([
+                    'status'=>2000,
+                    'message'=>'Successfully Updated'
+                ]);
+            }
+            Session::flash('success', 'Employee Updated');
+            return redirect('employee');
+        }
 
-        return redirect()->route('employee.index')->with('success', 'Employee Updated successfully');
+        return redirect('employee');
     }
 
-    public function destroy(Employee $employee)
+    public function destroy($id)
     {
-        $employee->delete();
-        return redirect()->route('employee.index')->with('success','Employee has been deleted successfully');
+        $data['employee'] = Employee::where('id', $id)->delete();
+
+        if(request()->ajax()){
+            return response()->json([
+                'status'=>2000,
+                'message'=>'Successfully Deleted'
+            ]);
+        }
     }
 }

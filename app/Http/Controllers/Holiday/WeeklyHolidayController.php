@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Holiday;
 use App\Http\Controllers\Controller;
 use App\Models\WeeklyHoliday;
 use Illuminate\Http\Request;
-use Session;
+use Illuminate\Support\Facades\Session;
 
 class WeeklyHolidayController extends Controller
 {

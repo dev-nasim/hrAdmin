@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\SubDepartment;
 use Illuminate\Http\Request;
 use App\Models\Department;
-use Session;
+use Illuminate\Support\Facades\Session;
 
 class subDepartmentController extends Controller
 {
