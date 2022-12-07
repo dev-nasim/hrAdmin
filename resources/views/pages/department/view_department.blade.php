@@ -1,14 +1,18 @@
 @extends('layouts.master')
 
 @section('content')
-   <div class="row">
-       <div class="col-md-8 text-left">
-           <h1 class="h3 mb-2 text-gray-800">Department</h1>
-       </div>
-       <div class="col-md-4 text-right">
-           <a href="{{url('department/create')}}" type="button" class="btn btn-primary"><i class="fa fa-plus"></i> Add Department</a>
-       </div>
-   </div>
+    @include('pages.department.modalForm')
+
+    <div class="row">
+        <div class="col-md-8 text-left">
+            <h1 class="h3 mb-2 text-gray-800">Department</h1>
+        </div>
+        <div class="col-md-4 text-right">
+            {{-- {{ url('department/create') }} --}}
+            <a href="#" type="button" data-toggle="modal" data-target="#addModal" class="btn btn-primary"><i
+                    class="fa fa-plus"></i> Add Department</a>
+        </div>
+    </div>
     <div class="card shadow mb-4">
         <form action="" method="GET">
             <div class="card-header py-3 row">
@@ -26,35 +30,42 @@
         </form>
         <div class="card-body">
             <div class="table-responsive">
-                @if(Session::has('success'))
-                <p class="alert alert-info">{{ Session::get('success') }}</p>
+                @if (Session::has('success'))
+                    <p class="alert alert-info">{{ Session::get('success') }}</p>
                 @endif
                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                     <thead>
-                    <tr>
-                        <th>SL No.</th>
-                        <th>Department</th>
-                        <th>Action</th>
-                    </tr>
+                        <tr>
+                            <th>SL No.</th>
+                            <th>Department</th>
+                            <th>Action</th>
+                        </tr>
                     </thead>
                     <tbody>
-                        @foreach($departments as $department)
-                    <tr>
-                        <td>{{ $loop->iteration }}</td>
-                        <td>{{$department->department_name}}</td>
-                        <td>
-                            <form action="{{ route('department.destroy',$department->id) }}" method="Post">
-                            <a href="{{ route('department.edit',$department->id) }}" class="btn btn-success"><i class="fa fa-pen"></i></a>
-                            @csrf
-                            @method('DELETE')
-                            <button type="submit" onclick="return confirm('Are you sure you want to delete this item?');" class="btn btn-danger"><i class="fa fa-trash"></i></button>
-                            </form>
-                        </td>
-                    </tr>
-                    @endforeach
+                        @foreach ($departments as $department)
+                            <tr>
+                                <td>{{ $loop->iteration }}</td>
+                                <td>{{ $department->department_name }}</td>
+                                <td>
+                                    <a class="btn btn-sm btn-outline-warning editDptButton"
+                                        id="{{ $department->id }}">Edit</a>
+
+                                    <a class="btn btn-sm btn-outline-danger deleteButton"
+                                        id="{{ $department->id }}">Delete</a>
+                                </td>
+                            </tr>
+                        @endforeach
+
                     </tbody>
                 </table>
             </div>
         </div>
     </div>
+@endsection
+@section('script')
+    <script>
+        window.dataUser = '{{ url('department') }}';
+        window.csrfToken = '{{ csrf_token() }}';
+    </script>
+    <script src="{{ asset('assets/scripts/department.js') }}"></script>
 @endsection

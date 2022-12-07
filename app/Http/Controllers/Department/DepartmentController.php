@@ -9,7 +9,7 @@ use Session;
 
 class DepartmentController extends Controller
 {
-    
+
     public function index()
     {
         $has_award = request()->input('has_award');
@@ -27,7 +27,13 @@ class DepartmentController extends Controller
             }
         })->paginate(10);
 
-        return view('pages.department.view_department',$data);
+        if (request()->ajax())
+        {
+            return view('pages.department.view_department',$data);
+        }else
+        {
+            return view('pages.department.view_department',$data);
+        }
     }
 
     public function create()
@@ -45,6 +51,13 @@ class DepartmentController extends Controller
         $model = new Department();
         $model->fill($request->all())->save();
 
+        if ($request->ajax()){
+            return response()->json([
+                'status'=>2000,
+                'message'=>'Successfully Inserted'
+            ]);
+        }
+
         Session::flash('success', 'Department Inserted');
         return redirect('department');
     }
@@ -56,25 +69,62 @@ class DepartmentController extends Controller
 
     public function edit($id)
     {
+
         $department = Department::find($id);
-        return view('pages.department.edit_dept')->with('departments', $department);
+
+        if(request()->ajax()){
+            if($department){
+                return response()->json($department);
+            }
+            return response()->json([]);
+        }
+
+       if ($department){
+        return view('pages.department.edit_dept', $department);
+       }
+       return redirect('department');
+
     }
 
 
-    public function update(Request $request, Department $department)
+
+    public function update(Request $request, $id)
     {
-        $request->validate([
-            'department_name' => 'required',
-        ]);
+        $department = Department::where('id', $request->input('department_id'))->first();
+        if ($department){
+            // $department->fill($request->all());
+            $department->department_name = $request->get('name');
+            $department->save();
 
-        $department->update($request->all());
 
-        return redirect()->route('department.index')->with('success', 'Department Updated successfully');
+            if(request()->ajax()){
+                if($department){
+                    return response()->json($department);
+                }
+                return response()->json([
+                    'status'=>2000,
+                 'message'=>'Successfully Updated'
+                ]);
+
+            }
+
+            Session::flash('success', 'User Inserted');
+            return redirect('department');
+        }
+
+         return redirect('department');
     }
 
-    public function destroy(Department $department)
+
+    public function destroy($id)
     {
-        $department->delete();
-        return redirect()->route('department.index')->with('success','Department has been deleted successfully');
+        $data['department'] = Department::where('id', $id)->delete();
+
+        if(request()->ajax()){
+            return response()->json([
+                'status'=>2000,
+                'message'=>'Successfully Deleted'
+            ]);
+        }
     }
 }
