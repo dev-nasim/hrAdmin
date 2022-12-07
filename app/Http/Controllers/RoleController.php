@@ -12,10 +12,18 @@ use Session;
 class RoleController extends Controller
 {
 
-    public function index()
+    public function index(Request $request)
     {
+
         $data['roles']= Role::get();
-        return view('pages.role.role_list',$data);
+        if($request->ajax()) {
+            return view('pages.role.roleListAjaxData', $data);
+        }
+        if (\request()->ajax()){
+            return view('pages.role.roleListAjaxData',$data);
+        }else{
+            return view('pages.role.role_list',$data);
+        }
     }
 
     public function create()
@@ -28,7 +36,12 @@ class RoleController extends Controller
         $request->role = trim($request->role);
         $model = new Role();
         $model->fill($request->all())->save();
-
+        if ($request->ajax()){
+            return response()->json([
+                'status'=>2000,
+                'message'=>'Successfully Inserted'
+            ]);
+        }
         Session::flash('success', 'Role Inserted');
         return redirect('role');
     }
@@ -40,17 +53,45 @@ class RoleController extends Controller
 
     public function edit($id)
     {
-        //
+        $data['role'] = Role::where('id', $id)->first();
+
+        if ($data['role']){
+            if(request()->ajax()){
+                return view('pages.role.roleFormAjax', $data);
+            }
+        }
+        return redirect('role');
     }
 
     public function update(Request $request, $id)
     {
-        //
+        $role = Role::where('id', $request->input('role_id'))->first();
+        if ($role){
+            $role->fill($request->all());
+            $role->save();
+
+            if(request()->ajax()){
+                return response()->json([
+                    'status'=>2000,
+                    'message'=>'Successfully Updated'
+                ]);
+            }
+            Session::flash('success', 'Role Updated');
+            return redirect('role');
+        }
+
+        return redirect('role');
     }
 
-    public function destroy(Role $role)
+    public function destroy($id)
     {
-        $role->delete();
-        return redirect()->route('role.index')->with('success','Role has been deleted successfully');
+        $data['role'] = Role::where('id', $id)->delete();
+
+        if(request()->ajax()){
+            return response()->json([
+                'status'=>2000,
+                'message'=>'Successfully Deleted'
+            ]);
+        }
     }
 }

@@ -2,12 +2,13 @@ var targetInput = $('#keyword');
 loadAjaxData();
 
 function loadAjaxData() {
-    var URL = `${dataUser}`;
+    var keyword = targetInput.val();
+    var URL = `${dataUser}?keyword=${keyword}`;
     $.ajax({
         url: URL,
         type: "get",
         success: function(response) {
-            $('#userListBody').html(response);
+            $('#dataTable').html(response);
         },
         error: function(jqXHR, textStatus, errorThrown) {
             console.log(textStatus, errorThrown);
@@ -23,12 +24,10 @@ $(document).on("click", '.deleteButton', function(event) {
     var id = $(this).attr('id');
     var URL = `${dataUser}/${id}`;
 
-
     $('#deleteModal').modal('show');
 
     $('#deleteModal').on('hide.bs.modal', function(event) {
         $('#btConfirm').off('click')
-
     })
 
     $('#btConfirm').on('click', function(event) {
@@ -54,16 +53,9 @@ $(document).on("click", '.deleteButton', function(event) {
 
 });
 
-
-
-
-
-
 // ===================================================
 //                 User Data Edit Json
 // ===================================================
-
-
 
 $(document).on("click", '.editButton', function(event) {
     var id = $(this).attr('id');
@@ -88,17 +80,20 @@ $(document).on("click", '.editButton', function(event) {
 
 
 $(document).on("click", '#dataUpdate', function(event) {
-    var id = $("input[name=user_id]").val();
+    var id = $("input[name=award_id]").val();
     var modal = $(this).attr('modal-id');
     var URL = `${dataUser}/${id}`;
     $.ajax({
         url: URL,
         type: "PUT",
         data: {
-            user_id: id,
-            name: $("#name").val(),
-            email: $("input[name=email]").val(),
-            birthday: $("input[name=birthday]").val(),
+            award_id: id,
+            awd_name: $("input[name=awd_name]").val(),
+            awd_des: $("input[name=awd_des]").val(),
+            employee_id: $("input[name=employee_id]").val(),
+            awd_item: $("input[name=awd_item]").val(),
+            awd_date: $("input[name=awd_date]").val(),
+            awd_by: $("input[name=awd_by]").val(),
             _token: csrfToken,
         },
         success: function(response) {
@@ -116,21 +111,20 @@ $(document).on("click", '#dataUpdate', function(event) {
     });
 });
 
-
 // ===================================================
 //                 User Add Json
 // ===================================================
 
 $(document).ready(function () {
-    $('#add_user').on('submit', function(e) {
+    $('#add_award').on('submit', function(e) {
         e.preventDefault();
         $.ajax({
             type: "POST",
-            url: "/users",
-            data: $('#add_user').serialize(),
+            url: "/award",
+            data: $('#add_award').serialize(),
             success: function (response) {
                 console.log(response)
-                $('#add_modal').modal('hide')
+                $('#add_gift').modal('hide')
                 $.toaster({
                     priority: 'success',
                     title: 'Success',

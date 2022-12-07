@@ -116,7 +116,7 @@
             <div class="bg-white py-2 collapse-inner rounded">
                 <a class="collapse-item" href="{{ url('weekly_holiday') }}">Weekly Holiday</a>
                 <a class="collapse-item" href="{{ url('holiday') }}">Holiday</a>
-                <a class="collapse-item" href="leave_application">Leave Application</a>
+                <a class="collapse-item" href="{{ url('leave') }}">Leave Application</a>
             </div>
         </div>
     </li>

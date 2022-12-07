@@ -107,18 +107,18 @@
 
     {{-- delete user --}}
     <div class="modal fade" id="deleteModal">
-        <div class="modal-dialog modal-lg">
+        <div class="modal-dialog modal-sm">
             <div class="modal-content">
                 <div class="modal-header">
                     <h4 class="modal-title">Delete Modal</h4>
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                 </div>
                 <div class="modal-body" id="deleteData">
-                    <h4>Are you sure? want to delete this data..!!</h4>
+                    <h4 style="color: red">Are you sure? want to delete this data..!!</h4>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal" id="btCancel">No</button>
-                    <button id="btConfirm" modal-id="deleteModal" type="button" class="btn btn-success">Yes</button>
+                    <button type="button" class="btn btn-outline-secondary" data-dismiss="modal" id="btCancel">No</button>
+                    <button id="btConfirm" modal-id="deleteModal" type="button" class="btn btn-outline-danger">Yes</button>
                 </div>
             </div>
         </div>
