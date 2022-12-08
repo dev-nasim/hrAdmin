@@ -5,9 +5,7 @@
             <h1 class="h3 mb-2 text-gray-800">User List</h1>
         </div>
         <div class="col-md-4 text-right">
-            <a type="button" class="btn btn-outline-info" data-toggle="modal" data-target="#add_modal"><i
-                    class="fa fa-plus"></i> Add
-                User</a>
+            <a type="button" class="btn btn-outline-info" data-toggle="modal" data-target="#add_modal"><i class="fa fa-plus"></i> Add User</a>
         </div>
     </div>
     <div class="card shadow mb-4">
@@ -36,11 +34,14 @@
                             <th>Action</th>
                         </tr>
                     </thead>
-                    <tbody id="userListBody"></tbody>
+                    <tbody id="userListBody">
+
+                    </tbody>
                 </table>
             </div>
         </div>
     </div>
+    <!-- The User Edit Modal -->
     <div class="modal fade" id="editModal">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
@@ -48,7 +49,9 @@
                     <h4 class="modal-title">Edit Modal</h4>
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                 </div>
-                <div class="modal-body" id="editData"></div>
+                <div class="modal-body" id="editData">
+
+                </div>
                 <div class="modal-footer">
                     <button id="dataUpdate" modal-id="editModal" type="button" class="btn btn-success">Update</button>
                 </div>

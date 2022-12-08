@@ -1,5 +1,5 @@
 @foreach ($users as $user)
-    <tr>
+    <tr id="user{{$user->id}}" row_index="{{$loop->iteration}}">
         <td>{{ $loop->iteration }}</td>
         <td>{{ $user->name }}</td>
         <td>{{ $user->email }}</td>

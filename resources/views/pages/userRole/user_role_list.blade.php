@@ -20,25 +20,37 @@
                         <th>Action</th>
                     </tr>
                     </thead>
-                    <tbody>
-                    @foreach($user_roles as $user_role)
-                        <tr>
-                            <td>{{ $loop->iteration }}</td>
-                            <td>{{$user_role->user ? $user_role->user->name: ''}}</td>
-                            <td>{{$user_role->role ? $user_role->role->role: ''}}</td>
-                            <td>
-                                <form action="{{ route('user_role.destroy',$user_role->id) }}" method="POST">
-                                    <a class="btn btn-primary" href="{{ route('user_role.edit',$user_role->id) }}"><i class="fa fa-pen"></i></a>
-                                    @csrf
-                                    @method('DELETE')
-                                    <button type="submit" onclick="return confirm('Are you sure you want to delete this item?');" class="btn btn-danger"><i class="fa fa-trash"></i></button>
-                                </form>
-                            </td>
-                        </tr>
-                    @endforeach
+                    <tbody id="userRoleListBody">
+
                     </tbody>
                 </table>
             </div>
         </div>
     </div>
+
+    {{-- delete user --}}
+    <div class="modal fade" id="deleteModal">
+        <div class="modal-dialog modal-sm">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+                <div class="modal-body" id="deleteData">
+                    <h4 style="color: red">Are you sure? want to delete this data..!!</h4>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-outline-secondary" data-dismiss="modal" id="btCancel">No</button>
+                    <button id="btConfirm" modal-id="deleteModal" type="button" class="btn btn-outline-danger">Yes</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+@endsection
+@section('script')
+    <script>
+        window.dataUser = '{{ url('user_role') }}';
+        window.csrfToken = '{{ csrf_token() }}';
+    </script>
+    <script src="{{ asset('assets/scripts/user_role.js') }}"></script>
 @endsection

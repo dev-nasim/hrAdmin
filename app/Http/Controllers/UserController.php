@@ -21,7 +21,7 @@ class UserController extends Controller
             if ($keyword){
                 $query->where('name','LIKE',"%$keyword%");
             }
-        })->get();
+        })->orderBy('id','DESC')->get();
 
         if (\request()->ajax()){
             return view('pages.users.userListAjaxData',$data);
@@ -48,11 +48,11 @@ class UserController extends Controller
         ];
         $model->fill($userArray);
         $model->save();
-
         if ($request->ajax()){
             return response()->json([
                 'status'=>2000,
-                'message'=>'Successfully Inserted'
+                'message'=>'Successfully Inserted',
+                'data'=>$model,
             ]);
         }
 

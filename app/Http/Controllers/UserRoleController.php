@@ -11,9 +11,12 @@ use Illuminate\Support\Facades\Session;
 class UserRoleController extends Controller
 {
 
-    public function index()
+    public function index(Request $request)
     {
         $data['user_roles'] = UserRole::with(['role','user'])->paginate(10);
+        if($request->ajax()) {
+            return view('pages.userRole.ajaxUserRoleList', $data);
+        }
         return view('pages.userRole.user_role_list',$data);
     }
 
@@ -66,10 +69,13 @@ class UserRoleController extends Controller
 
     public function destroy($id)
     {
-        UserRole::destroy($id);
-        // $user_role->delete();
-
-        Session::flash('success', 'user Deleted');
-        return redirect('user_role');
+        $data['user_role'] = UserRole::where('id', $id)->delete();
+//        UserRole::destroy($id);
+        if(request()->ajax()){
+            return response()->json([
+                'status'=>2000,
+                'message'=>'Successfully Deleted'
+            ]);
+        }
     }
 }
