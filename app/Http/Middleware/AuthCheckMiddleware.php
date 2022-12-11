@@ -19,7 +19,6 @@ class AuthCheckMiddleware
         if (auth()->check()){
             return $next($request);
         }
-
-        return redirect('login');
+            return redirect('login');
     }
 }

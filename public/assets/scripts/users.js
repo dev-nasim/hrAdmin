@@ -80,7 +80,7 @@ $(document).on("click", '.editButton', function(event) {
         url: URL,
         type: "get",
         success: function(response) {
-            $('#editModal').append("<input type='hidden' name='row_index' value="+rowID+">").modal('show');
+            $('#editModal').append("<input type='hidden' id='row_index' name='row_index' value="+rowID+">").modal('show');
             $('#editData').html(response);
         },
         error: function(jqXHR, textStatus, errorThrown) {
@@ -116,16 +116,18 @@ $(document).on("click", '#dataUpdate', function(event) {
                 message: response.message
             });
             $('#user'+id).remove();
-            var lastID = parseInt($(this).closest('tr').attr('lastID'))+1;
+
+            var serial = $('#row_index').val();
+
             $('#userListBody').append("<tr id=user"+id+">"+
-                "<td>"+id+"</td>" +
-                "<td>"+$("#name").val()+"</td>" +
-                "<td>"+$("input[name=email]").val()+"</td>" +
-                "<td>"+$("input[name=birthday]").val()+"</td>" +
-                "<td>" +
-                "   <a class=\"btn btn-sm btn-outline-warning editButton\" id="+id+">Edit</a>" +
-                "   <a class=\"btn btn-sm btn-outline-danger deleteButton\" id="+id+">Delete</a>" +
-                "</td>" +
+                    "<td>"+serial+"</td>" +
+                    "<td>"+$("#name").val()+"</td>" +
+                    "<td>"+$("input[name=email]").val()+"</td>" +
+                    "<td>"+$("input[name=birthday]").val()+"</td>" +
+                    "<td>" +
+                    "   <a class=\"btn btn-sm btn-outline-warning editButton\" id="+id+">Edit</a>" +
+                    "   <a class=\"btn btn-sm btn-outline-danger deleteButton\" id="+id+">Delete</a>" +
+                    "</td>" +
                 "</tr>");
         },
         error: function(jqXHR, textStatus, errorThrown) {

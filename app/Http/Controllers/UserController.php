@@ -2,13 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Department;
 use App\Models\User;
 use Illuminate\Http\Request;
 use App\Http\Requests\UserRequest;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Session;
-use function Symfony\Component\Finder\in;
+use Illuminate\Http\Response;
 
 class UserController extends Controller
 {
@@ -110,5 +109,26 @@ class UserController extends Controller
                 'message'=>'Successfully Deleted'
             ]);
         }
+    }
+
+//    API STORE
+
+    public function apiStore(Request $request){
+        $model = new User();
+        $userArray = [
+            'name'=>$request->name,
+            'email'=>$request->email,
+            'birthday'=>$request->birthday,
+            'password'=>Hash::make($request->password),
+        ];
+        $model->fill($userArray);
+        $model->save();
+
+            return response()->json([
+                'status'=>2000,
+                'message'=>'Successfully Inserted',
+                'data'=>$model,
+            ]);
+//        return response()->json(['message','User Insert'],Response::HTTP_SUCCESS);
     }
 }

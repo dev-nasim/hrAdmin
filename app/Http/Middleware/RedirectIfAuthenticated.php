@@ -22,9 +22,18 @@ class RedirectIfAuthenticated
         $guards = empty($guards) ? [null] : $guards;
 
         foreach ($guards as $guard) {
-            if (Auth::guard($guard)->check()) {
-                return redirect(RouteServiceProvider::HOME);
+
+            if($guard=='api'){
+                if (Auth::guard('api')->check()) {
+                    return response()->Json(['error'=>'Unauthenticated'],401);
+                }
+
+            }else{
+                if (Auth::guard($guard)->check()) {
+                    return redirect(RouteServiceProvider::HOME);
+                }
             }
+
         }
 
         return $next($request);
